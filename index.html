@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="ta, en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MITS Institutional EOD Free Scanner V2</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #070a11;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+<!-- Google Fonts: Inter & Noto Sans Tamil -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       MITS Free Scanner V2 - Institutional Dark UI Styling
+       WordPress Scoped Theme Isolation & Reset
+       All rules strictly scoped under .mits-scanner-wrapper
+       ========================================================================== */
+    .mits-scanner-wrapper {
+      --mits-bg-dark: #070a11;
+      --mits-card-bg: #0e1526;
+      --mits-card-bg-subtle: #131b2e;
+      --mits-card-hover: #17223b;
+      --mits-border: rgba(255, 255, 255, 0.08);
+      --mits-border-strong: rgba(255, 255, 255, 0.16);
+      --mits-cyan: #00f0ff;
+      --mits-cyan-glow: rgba(0, 240, 255, 0.18);
+      --mits-sky: #38bdf8;
+      --mits-emerald: #10b981;
+      --mits-emerald-glow: rgba(16, 185, 129, 0.16);
+      --mits-rose: #f43f5e;
+      --mits-rose-glow: rgba(244, 63, 94, 0.16);
+      --mits-amber: #f59e0b;
+      --mits-amber-glow: rgba(245, 158, 11, 0.16);
+      --mits-purple: #a855f7;
+      --mits-text-main: #f8fafc;
+      --mits-text-muted: #94a3b8;
+      --mits-text-faint: #64748b;
+      --mits-radius-lg: 14px;
+      --mits-radius-md: 10px;
+      --mits-radius-sm: 6px;
+      
+      font-family: 'Inter', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      background-color: var(--mits-bg-dark) !important;
+      color: var(--mits-text-main) !important;
+      padding: 24px 20px 40px;
+      box-sizing: border-box !important;
+      line-height: 1.5 !important;
+      font-size: 14px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: 100vh;
+      margin: 0 auto !important;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: left !important;
+      letter-spacing: normal !important;
+    }
+
+    .mits-scanner-wrapper *,
+    .mits-scanner-wrapper *::before,
+    .mits-scanner-wrapper *::after {
+      box-sizing: border-box !important;
+      font-family: inherit;
+    }
+
+    /* WordPress Scoped Isolation & Reset Rules */
+    .mits-scanner-wrapper h1,
+    .mits-scanner-wrapper h2,
+    .mits-scanner-wrapper h3,
+    .mits-scanner-wrapper h4,
+    .mits-scanner-wrapper p,
+    .mits-scanner-wrapper ul,
+    .mits-scanner-wrapper ol,
+    .mits-scanner-wrapper li {
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1.4 !important;
+      letter-spacing: normal !important;
+    }
+
+    .mits-scanner-wrapper table {
+      border: none !important;
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+    }
+
+    .mits-scanner-wrapper thead,
+    .mits-scanner-wrapper tbody,
+    .mits-scanner-wrapper tr {
+      border: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent;
+    }
+
+    .mits-scanner-wrapper th,
+    .mits-scanner-wrapper td {
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      box-sizing: border-box !important;
+    }
+
+    .mits-scanner-wrapper input,
+    .mits-scanner-wrapper select,
+    .mits-scanner-wrapper button {
+      border: none;
+      outline: none !important;
+      background: none;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      margin: 0 !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      box-shadow: none;
+    }
+
+    /* Container constraint */
+    .mits-scanner-wrapper .mits-scanner-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Top Branding & Status Header */
+    .mits-scanner-wrapper .mits-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--mits-border);
+    }
+
+    .mits-scanner-wrapper .mits-brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mits-scanner-wrapper .mits-brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+      border-radius: var(--mits-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #050b14;
+      font-size: 18px;
+      box-shadow: 0 0 20px var(--mits-cyan-glow);
+      flex-shrink: 0;
+    }
+
+    .mits-scanner-wrapper .mits-brand-text h1 {
+      font-size: 22px !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.02em !important;
+      margin: 0 !important;
+      color: #ffffff !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mits-scanner-wrapper .mits-brand-text h1 span.badge-free {
+      background: linear-gradient(90deg, #00f0ff 0%, #0284c7 100%);
+      color: #030a16;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    .mits-scanner-wrapper .mits-brand-text p {
+      margin: 3px 0 0 0 !important;
+      color: var(--mits-text-muted) !important;
+      font-size: 13px !important;
+      line-height: 1.5 !important;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .mits-scanner-wrapper .mits-subtitle-tamil {
+      color: #f59e0b !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+    }
+
+    .mits-scanner-wrapper .mits-subtitle-divider {
+      color: rgba(255, 255, 255, 0.22);
+      font-size: 10px;
+    }
+
+    .mits-scanner-wrapper .mits-meta-status {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--mits-text-muted);
+    }
+
+    .mits-scanner-wrapper .mits-live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .mits-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: mits-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes mits-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Market Breadth Header Banner */
+    .mits-scanner-wrapper .mits-breadth-banner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mits-scanner-wrapper .mits-breadth-card {
+      background: var(--mits-card-bg);
+      border: 1px solid var(--mits-border);
+      border-radius: var(--mits-radius-lg);
+      padding: 16px 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .mits-scanner-wrapper .mits-breadth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4), transparent);
+    }
+
+    .mits-scanner-wrapper .mits-breadth-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .mits-scanner-wrapper .mits-card-label {
+      color: var(--mits-text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .mits-scanner-wrapper .mits-card-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mits-scanner-wrapper .mits-card-chg {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .mits-scanner-wrapper .mits-card-chg.positive {
+      color: #34d399;
+      background: var(--mits-emerald-glow);
+    }
+
+    .mits-scanner-wrapper .mits-card-chg.negative {
+      color: #f87171;
+      background: var(--mits-rose-glow);
+    }
+
+    /* Market Breadth Bar */
+    .mits-scanner-wrapper .mits-breadth-ratio-bar {
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0 6px;
+      background: #1e293b;
+    }
+
+    .mits-scanner-wrapper .mits-breadth-advances {
+      background: #10b981;
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    .mits-scanner-wrapper .mits-breadth-declines {
+      background: #f43f5e;
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    .mits-scanner-wrapper .mits-breadth-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mits-text-muted);
+    }
+
+    .mits-scanner-wrapper .mits-breadth-stats span.adv-text { color: #34d399; }
+    .mits-scanner-wrapper .mits-breadth-stats span.dec-text { color: #f87171; }
+
+    /* Scanner Tabs Navigation */
+    .mits-scanner-wrapper .mits-tabs-bar {
+      display: flex;
+      gap: 8px;
+      background: #090e1b;
+      padding: 6px;
+      border-radius: var(--mits-radius-lg);
+      border: 1px solid var(--mits-border);
+      margin-bottom: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+    }
+
+    .mits-scanner-wrapper .mits-tabs-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn {
+      flex: 1;
+      min-width: 175px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 16px;
+      background: rgba(245, 158, 11, 0.04) !important;
+      border: 1px solid rgba(245, 158, 11, 0.28) !important;
+      border-radius: 10px !important;
+      color: #e2e8f0 !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn:hover {
+      color: #fef3c7 !important;
+      background: rgba(245, 158, 11, 0.10) !important;
+      border-color: rgba(251, 191, 36, 0.7) !important;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.35), inset 0 0 8px rgba(251, 191, 36, 0.12) !important;
+      transform: translateY(-1px);
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn.active {
+      color: #fef3c7 !important;
+      background: rgba(245, 158, 11, 0.14) !important;
+      border-color: #fbbf24 !important;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.45), inset 0 0 10px rgba(251, 191, 36, 0.2) !important;
+      text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn.active:hover {
+      color: #ffffff !important;
+      background: rgba(245, 158, 11, 0.18) !important;
+      border-color: #f59e0b !important;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.55), inset 0 0 12px rgba(251, 191, 36, 0.25) !important;
+      transform: translateY(-1px);
+    }
+
+    .mits-scanner-wrapper .mits-tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      color: #e2e8f0;
+      font-size: 11px;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn:hover .mits-tab-count {
+      color: #fef3c7;
+      border-color: rgba(251, 191, 36, 0.6);
+      background: rgba(245, 158, 11, 0.16);
+    }
+
+    .mits-scanner-wrapper .mits-tab-btn.active .mits-tab-count {
+      background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+      border-color: #fbbf24;
+      color: #0b0f19;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+    }
+
+    /* Stage Summary Filter Tiles (Tab 2 VCP) */
+    .mits-scanner-wrapper .mits-stage-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .mits-scanner-wrapper .mits-stage-card {
+      background: var(--mits-card-bg);
+      border: 1px solid var(--mits-border);
+      border-radius: var(--mits-radius-md);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .mits-scanner-wrapper .mits-stage-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-stage-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: var(--mits-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .mits-scanner-wrapper .mits-stage-card.active {
+      background: #111a30;
+      border-color: var(--mits-cyan);
+      box-shadow: 0 0 16px var(--mits-cyan-glow);
+    }
+
+    .mits-scanner-wrapper .mits-stage-card.card-breakout.active {
+      border-color: #10b981;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+    }
+    .mits-scanner-wrapper .mits-stage-card.card-breakout::before {
+      background: linear-gradient(90deg, transparent, #10b981, transparent);
+    }
+
+    .mits-scanner-wrapper .mits-stage-card.card-forming.active {
+      border-color: #f59e0b;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+    }
+    .mits-scanner-wrapper .mits-stage-card.card-forming::before {
+      background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+    }
+
+    .mits-scanner-wrapper .mits-stage-card.card-climbing.active {
+      border-color: #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+    .mits-scanner-wrapper .mits-stage-card.card-climbing::before {
+      background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    }
+
+    .mits-scanner-wrapper .mits-stage-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .mits-scanner-wrapper .mits-stage-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mits-scanner-wrapper .mits-stage-count {
+      font-size: 15px;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .mits-scanner-wrapper .mits-stage-desc {
+      font-size: 11.5px;
+      color: var(--mits-text-muted);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    /* Filter & Search Toolbar */
+    .mits-scanner-wrapper .mits-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: var(--mits-card-bg);
+      border: 1px solid var(--mits-border);
+      border-radius: var(--mits-radius-lg);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+
+    .mits-scanner-wrapper .mits-filter-inputs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .mits-scanner-wrapper .mits-search-box {
+      position: relative;
+      min-width: 260px;
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .mits-scanner-wrapper .mits-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--mits-text-faint);
+      pointer-events: none;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .mits-scanner-wrapper .mits-input {
+      width: 100%;
+      height: 42px;
+      min-height: 42px;
+      background: #090e1a !important;
+      border: 1px solid var(--mits-border) !important;
+      border-radius: var(--mits-radius-sm) !important;
+      color: #ffffff !important;
+      padding: 0 12px 0 38px !important;
+      font-size: 13px !important;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-input:focus {
+      border-color: var(--mits-cyan) !important;
+      box-shadow: 0 0 0 2px var(--mits-cyan-glow) !important;
+    }
+
+    .mits-scanner-wrapper .mits-select {
+      background: #090e1a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E") no-repeat right 12px center !important;
+      border: 1px solid var(--mits-border) !important;
+      border-radius: var(--mits-radius-sm) !important;
+      color: #ffffff !important;
+      height: 42px;
+      min-height: 42px;
+      padding: 0 32px 0 14px !important;
+      font-size: 13px !important;
+      outline: none;
+      cursor: pointer;
+      min-width: 160px;
+      transition: all 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-select:focus {
+      border-color: var(--mits-cyan) !important;
+    }
+
+    .mits-scanner-wrapper .mits-select option {
+      background: #0e1526;
+      color: #ffffff;
+    }
+
+    .mits-scanner-wrapper .mits-toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mits-scanner-wrapper .mits-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 42px;
+      min-height: 42px;
+      padding: 0 16px !important;
+      font-size: 12.5px !important;
+      font-weight: 600 !important;
+      border-radius: var(--mits-radius-sm) !important;
+      border: 1px solid var(--mits-border) !important;
+      background: #131b2e !important;
+      color: var(--mits-text-main) !important;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .mits-scanner-wrapper .mits-btn:hover {
+      background: var(--mits-card-hover) !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .mits-scanner-wrapper .mits-btn.btn-export {
+      background: rgba(0, 240, 255, 0.1) !important;
+      border-color: rgba(0, 240, 255, 0.3) !important;
+      color: var(--mits-cyan) !important;
+    }
+
+    .mits-scanner-wrapper .mits-btn.btn-export:hover {
+      background: rgba(0, 240, 255, 0.2) !important;
+    }
+
+    /* Sub-Category Filter Pills */
+    .mits-scanner-wrapper .mits-pills-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+    }
+
+    .mits-scanner-wrapper .mits-pills-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mits-scanner-wrapper .mits-pill {
+      background: #0e1526;
+      border: 1px solid var(--mits-border);
+      color: var(--mits-text-muted);
+      min-height: 38px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .mits-scanner-wrapper .mits-pill:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mits-scanner-wrapper .mits-pill.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--mits-sky);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Table Container & Smooth Touch-Scrolling */
+    .mits-scanner-wrapper .mits-table-container {
+      background: var(--mits-card-bg);
+      border: 1px solid var(--mits-border);
+      border-radius: var(--mits-radius-lg);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mits-scanner-wrapper .mits-table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+    .mits-scanner-wrapper .mits-table-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .mits-scanner-wrapper .mits-table-scroll::-webkit-scrollbar-track {
+      background: #090e1b;
+    }
+
+    .mits-scanner-wrapper .mits-table-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 3px;
+    }
+
+    .mits-scanner-wrapper .mits-table-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--mits-cyan);
+    }
+
+    .mits-scanner-wrapper .mits-table {
+      width: 100%;
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
+      text-align: left;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .mits-table th {
+      background: #0a0f1d;
+      color: var(--mits-text-muted);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--mits-border-strong) !important;
+      user-select: none;
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    .mits-scanner-wrapper .mits-table th:hover {
+      color: #ffffff;
+    }
+
+    .mits-scanner-wrapper .mits-table th.no-sort {
+      cursor: default;
+    }
+
+    .mits-scanner-wrapper .mits-sort-indicator {
+      display: inline-block;
+      margin-left: 5px;
+      font-size: 11px;
+      color: var(--mits-text-faint);
+    }
+
+    .mits-scanner-wrapper .mits-sort-indicator.active {
+      color: var(--mits-cyan);
+    }
+
+    .mits-scanner-wrapper .mits-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--mits-border) !important;
+      color: #e2e8f0;
+      font-variant-numeric: tabular-nums;
+      vertical-align: middle;
+    }
+
+    .mits-scanner-wrapper .mits-table tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    .mits-scanner-wrapper .mits-table tbody tr:hover {
+      background: var(--mits-card-hover);
+    }
+
+    /* Sticky Stock Ticker / Symbol Column with Subtle Shadow */
+    .mits-scanner-wrapper .mits-table th:first-child,
+    .mits-scanner-wrapper .mits-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background: #0a0f1d;
+      border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 4px 0 12px -2px rgba(0, 0, 0, 0.6);
+    }
+
+    .mits-scanner-wrapper .mits-table td:first-child {
+      background: #0e1526;
+      z-index: 8;
+    }
+
+    .mits-scanner-wrapper .mits-table tbody tr:hover td:first-child {
+      background: var(--mits-card-hover);
+    }
+
+    /* Cell Component Styles */
+    .mits-scanner-wrapper .stock-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 135px;
+    }
+
+    .mits-scanner-wrapper .stock-symbol {
+      font-weight: 700;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+    }
+
+    .mits-scanner-wrapper .stock-name {
+      font-size: 11px;
+      color: var(--mits-text-muted);
+      max-width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .sector-badge {
+      display: inline-block;
+      background: #162035;
+      color: #94a3b8;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .price-val {
+      font-weight: 600;
+      font-size: 13.5px;
+      color: #ffffff;
+    }
+
+    .mits-scanner-wrapper .badge-pct {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .badge-pct.positive {
+      color: #34d399;
+      background: var(--mits-emerald-glow);
+    }
+
+    .mits-scanner-wrapper .badge-pct.negative {
+      color: #f87171;
+      background: var(--mits-rose-glow);
+    }
+
+    .mits-scanner-wrapper .badge-pct.neutral {
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Metric Badges */
+    .mits-scanner-wrapper .badge-rs {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      width: 32px;
+      height: 24px;
+      border-radius: 4px;
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--mits-cyan);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+
+    .mits-scanner-wrapper .badge-rs.elite {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(59, 130, 246, 0.25) 100%);
+      color: #ffffff;
+      border-color: var(--mits-cyan);
+      box-shadow: 0 0 10px var(--mits-cyan-glow);
+    }
+
+    .mits-scanner-wrapper .badge-grade {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .badge-grade.grade-a-plus {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .mits-scanner-wrapper .badge-grade.grade-a {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .mits-scanner-wrapper .badge-grade.grade-b {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .mits-scanner-wrapper .delivery-progress-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 130px;
+    }
+
+    .mits-scanner-wrapper .delivery-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .mits-scanner-wrapper .delivery-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%);
+      border-radius: 3px;
+    }
+
+    .mits-scanner-wrapper .badge-signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--mits-border);
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .badge-signal.bullish {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .mits-scanner-wrapper .badge-signal.highlight {
+      color: var(--mits-cyan);
+      background: rgba(0, 240, 255, 0.12);
+      border-color: rgba(0, 240, 255, 0.25);
+    }
+
+    /* Footer Meta & Stats */
+    .mits-scanner-wrapper .mits-table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #090e1b;
+      border-top: 1px solid var(--mits-border);
+      font-size: 12px;
+      color: var(--mits-text-muted);
+    }
+
+    .mits-scanner-wrapper .mits-empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--mits-text-muted);
+    }
+
+    .mits-scanner-wrapper .mits-empty-state svg {
+      width: 48px;
+      height: 48px;
+      color: var(--mits-text-faint);
+      margin-bottom: 12px;
+    }
+
+    .mits-scanner-wrapper .mits-empty-state h3 {
+      font-size: 16px;
+      color: #ffffff;
+      margin: 0 0 6px 0 !important;
+    }
+
+    /* ==========================================================================
+       Responsive Breakpoints (Tablet & Mobile Optimization)
+       ========================================================================== */
+
+    /* Tablet & Medium Screens (<= 1024px) */
+    @media (max-width: 1024px) {
+      .mits-scanner-wrapper .mits-breadth-banner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .mits-scanner-wrapper .mits-breadth-card:last-child {
+        grid-column: span 2;
+      }
+    }
+
+    /* Small Tablets & Mobile Devices (<= 768px) */
+    @media (max-width: 768px) {
+      .mits-scanner-wrapper {
+        padding: 14px 10px 32px;
+      }
+
+      /* Header Top */
+      .mits-scanner-wrapper .mits-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+      }
+
+      .mits-scanner-wrapper .mits-brand-title {
+        gap: 10px;
+      }
+
+      .mits-scanner-wrapper .mits-brand-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+      }
+
+      .mits-scanner-wrapper .mits-brand-text h1 {
+        font-size: 17px !important;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .mits-scanner-wrapper .mits-brand-text p {
+        font-size: 11.5px !important;
+      }
+
+      .mits-scanner-wrapper .mits-meta-status {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+      }
+
+      /* Market Breadth Cards */
+      .mits-scanner-wrapper .mits-breadth-banner {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .mits-scanner-wrapper .mits-breadth-card:last-child {
+        grid-column: span 1;
+      }
+
+      .mits-scanner-wrapper .mits-breadth-card {
+        padding: 12px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-card-val {
+        font-size: 19px;
+      }
+
+      /* Tabs Bar */
+      .mits-scanner-wrapper .mits-tabs-bar {
+        padding: 4px;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-bottom: 14px;
+      }
+
+      .mits-scanner-wrapper .mits-tab-btn {
+        min-width: auto;
+        flex: 0 0 auto;
+        padding: 9px 13px;
+        font-size: 12px !important;
+        min-height: 40px;
+        gap: 7px;
+      }
+
+      .mits-scanner-wrapper .mits-tab-count {
+        font-size: 10px;
+        height: 18px;
+        min-width: 18px;
+        padding: 0 5px;
+      }
+
+      /* Stage Summary Tiles Mobile */
+      .mits-scanner-wrapper .mits-stage-tiles {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .mits-scanner-wrapper .mits-stage-card {
+        padding: 10px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-stage-title {
+        font-size: 12.5px;
+      }
+
+      .mits-scanner-wrapper .mits-stage-count {
+        font-size: 13.5px;
+      }
+
+      /* Search & Filter Toolbar */
+      .mits-scanner-wrapper .mits-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+
+      .mits-scanner-wrapper .mits-filter-inputs {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .mits-scanner-wrapper .mits-search-box {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+      }
+
+      .mits-scanner-wrapper .mits-select {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .mits-scanner-wrapper .mits-toolbar-actions {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+      }
+
+      .mits-scanner-wrapper .mits-btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      /* Pills Sub-filters Bar */
+      .mits-scanner-wrapper .mits-pills-bar {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+        gap: 6px;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+      }
+
+      .mits-scanner-wrapper .mits-pill {
+        flex: 0 0 auto;
+        min-height: 36px;
+        padding: 5px 12px;
+        font-size: 11.5px;
+      }
+
+      /* Responsive Compact Table */
+      .mits-scanner-wrapper .mits-table th,
+      .mits-scanner-wrapper .mits-table td {
+        padding: 9px 10px;
+        font-size: 12px;
+      }
+
+      .mits-scanner-wrapper .mits-table th:first-child,
+      .mits-scanner-wrapper .mits-table td:first-child {
+        padding-left: 10px;
+        padding-right: 12px;
+      }
+
+      .mits-scanner-wrapper .stock-cell {
+        min-width: 115px;
+      }
+
+      .mits-scanner-wrapper .stock-symbol {
+        font-size: 12.5px;
+      }
+
+      .mits-scanner-wrapper .stock-name {
+        font-size: 10px;
+        max-width: 105px;
+      }
+
+      .mits-scanner-wrapper .price-val {
+        font-size: 12.5px;
+      }
+
+      .mits-scanner-wrapper .badge-pct {
+        font-size: 11px;
+        padding: 2px 6px;
+      }
+
+      .mits-scanner-wrapper .badge-rs {
+        font-size: 11px;
+        width: 28px;
+        height: 22px;
+      }
+
+      .mits-scanner-wrapper .badge-grade {
+        font-size: 10.5px;
+        padding: 2px 6px;
+      }
+
+      .mits-scanner-wrapper .badge-signal {
+        font-size: 10.5px;
+        padding: 2px 6px;
+      }
+
+      .mits-scanner-wrapper .sector-badge {
+        font-size: 10px;
+        padding: 2px 6px;
+      }
+
+      .mits-scanner-wrapper .delivery-progress-cell {
+        min-width: 100px;
+      }
+
+      /* Footer */
+      .mits-scanner-wrapper .mits-table-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 10px 14px;
+        font-size: 11px;
+      }
+    }
+
+    /* Extra Small Phones (<= 480px) */
+    @media (max-width: 480px) {
+      .mits-scanner-wrapper {
+        padding: 10px 6px 24px;
+      }
+
+      .mits-scanner-wrapper .mits-table-container {
+        border-radius: var(--mits-radius-md);
+      }
+
+      .mits-scanner-wrapper .mits-brand-text h1 {
+        font-size: 16px !important;
+      }
+
+      .mits-scanner-wrapper .stock-cell {
+        min-width: 105px;
+      }
+
+      .mits-scanner-wrapper .stock-name {
+        max-width: 95px;
+      }
+    }
+  </style>
+
+
+<div class="mits-scanner-wrapper">
+  <div class="mits-scanner-container">
+
+    <!-- Top Branding & EOD Status Header -->
+    <header class="mits-header-top">
+      <div class="mits-brand-title">
+        <div class="mits-brand-icon">M</div>
+        <div class="mits-brand-text">
+          <h1>MITS Institutional Scanner <span class="badge-free">Free EOD</span></h1>
+          <p><span class="mits-subtitle-tamil">ஸ்மார்ட் டிரேடர்களுக்கான ஸ்மார்ட் ஸ்கேனர்</span> <span class="mits-subtitle-divider">•</span> <span>Nifty 500 Universe</span> <span class="mits-subtitle-divider">•</span> <span>EOD Quantitative Suite</span></p>
+        </div>
+      </div>
+      <div class="mits-meta-status">
+        <div class="mits-live-indicator">
+          <span class="mits-live-dot"></span>
+          <span id="mits-engine-status">EOD FINAL</span>
+        </div>
+        <div id="mits-last-updated">Updated: 2026-09-17 16:30 IST</div>
+      </div>
+    </header>
+
+    <!-- Nifty 50 & Nifty 500 Market Breadth Banner -->
+    <section class="mits-breadth-banner">
+      <!-- Nifty 50 Card -->
+      <div class="mits-breadth-card">
+        <div class="mits-breadth-card-header">
+          <span class="mits-card-label">NIFTY 50 BENCHMARK</span>
+          <span id="nifty50-badge" class="mits-card-chg positive">+0.56%</span>
+        </div>
+        <div id="nifty50-val" class="mits-card-val">25,418.30</div>
+        <div class="mits-breadth-ratio-bar">
+          <div id="nifty50-adv-bar" class="mits-breadth-advances" style="width: 68%;"></div>
+          <div id="nifty50-dec-bar" class="mits-breadth-declines" style="width: 32%;"></div>
+        </div>
+        <div class="mits-breadth-stats">
+          <span class="adv-text">▲ <span id="nifty50-adv">34</span> Advances</span>
+          <span class="dec-text">▼ <span id="nifty50-dec">16</span> Declines</span>
+        </div>
+      </div>
+
+      <!-- Nifty 500 Card -->
+      <div class="mits-breadth-card">
+        <div class="mits-breadth-card-header">
+          <span class="mits-card-label">NIFTY 500 BREADTH</span>
+          <span id="nifty500-badge" class="mits-card-chg positive">+0.71%</span>
+        </div>
+        <div id="nifty500-val" class="mits-card-val">23,890.15</div>
+        <div class="mits-breadth-ratio-bar">
+          <div id="nifty500-adv-bar" class="mits-breadth-advances" style="width: 65.6%;"></div>
+          <div id="nifty500-dec-bar" class="mits-breadth-declines" style="width: 34.4%;"></div>
+        </div>
+        <div class="mits-breadth-stats">
+          <span class="adv-text">▲ <span id="nifty500-adv">328</span> Advances</span>
+          <span class="dec-text">▼ <span id="nifty500-dec">172</span> Declines</span>
+        </div>
+      </div>
+
+      <!-- Regime & Trend Indicator -->
+      <div class="mits-breadth-card">
+        <div class="mits-breadth-card-header">
+          <span class="mits-card-label">MARKET REGIME & BREADTH</span>
+          <span class="badge-signal bullish" id="market-regime-status">Bullish Confirmation</span>
+        </div>
+        <div id="breadth-ratio-val" class="mits-card-val" style="font-size: 20px; color: #38bdf8;">1.91 : 1 Ratio</div>
+        <div style="margin-top: 10px; font-size: 12px; color: var(--mits-text-muted); display: flex; justify-content: space-between;">
+          <span>Stocks > 200 DMA:</span>
+          <strong id="pct-above-200dma" style="color: #34d399;">74.2%</strong>
+        </div>
+        <div style="margin-top: 4px; font-size: 12px; color: var(--mits-text-muted); display: flex; justify-content: space-between;">
+          <span>Universe Scanned:</span>
+          <strong>500 NSE Equities</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scanner Tabs (5 Tabs) -->
+    <nav class="mits-tabs-bar" role="tablist">
+      <button class="mits-tab-btn active" data-tab="rs_leaders" role="tab" aria-selected="true">
+        <span>🚀 Relative Strength</span>
+        <span class="mits-tab-count" id="count-rs_leaders">0</span>
+      </button>
+      <button class="mits-tab-btn" data-tab="breakout" role="tab" aria-selected="false">
+        <span>🌪️ VCP Contraction</span>
+        <span class="mits-tab-count" id="count-breakout">0</span>
+      </button>
+      <button class="mits-tab-btn" data-tab="high_delivery" role="tab" aria-selected="false">
+        <span>🏛️ Institutional Delivery</span>
+        <span class="mits-tab-count" id="count-high_delivery">0</span>
+      </button>
+      <button class="mits-tab-btn" data-tab="vcp" role="tab" aria-selected="false">
+        <span>🔥 Momentum Breakouts</span>
+        <span class="mits-tab-count" id="count-vcp">0</span>
+      </button>
+      <button class="mits-tab-btn" data-tab="fifty_two_week_high" role="tab" aria-selected="false">
+        <span>📈 Trend Matrix</span>
+        <span class="mits-tab-count" id="count-fifty_two_week_high">0</span>
+      </button>
+    </nav>
+
+    <!-- Stage Summary Filter Tiles for Tab 2 (VCP Contraction Engine) -->
+    <div id="mits-stage-tiles-container" class="mits-stage-tiles" style="display: none;"></div>
+
+    <!-- Search & Filter Controls -->
+    <div class="mits-toolbar">
+      <div class="mits-filter-inputs">
+        <div class="mits-search-box">
+          <span class="mits-search-icon">🔍</span>
+          <input type="text" id="mits-search-input" class="mits-input" placeholder="Search Ticker, Company..." autocomplete="off">
+        </div>
+        <select id="mits-sector-select" class="mits-select">
+          <option value="ALL">All Sectors</option>
+        </select>
+        <select id="mits-ema-select" class="mits-select" style="display: none;">
+          <option value="ALL">All EMA Levels</option>
+          <option value="above_20_ema">Above 20 EMA</option>
+          <option value="above_50_ema">Above 50 EMA</option>
+          <option value="above_100_ema">Above 100 EMA</option>
+          <option value="above_200_ema">Above 200 EMA</option>
+        </select>
+        <select id="mits-sma-select" class="mits-select" style="display: none;">
+          <option value="ALL">All SMA Levels</option>
+          <option value="above_20_sma">Above 20 SMA</option>
+          <option value="above_50_sma">Above 50 SMA</option>
+          <option value="above_100_sma">Above 100 SMA</option>
+          <option value="above_200_sma">Above 200 SMA</option>
+        </select>
+        <select id="mits-fresh-ema-select" class="mits-select" style="display: none;">
+          <option value="ALL">All Fresh EMA Cross</option>
+          <option value="cross_above_20_ema">⚡ Fresh Cross 20 EMA</option>
+          <option value="cross_above_50_ema">⚡ Fresh Cross 50 EMA</option>
+          <option value="cross_above_100_ema">⚡ Fresh Cross 100 EMA</option>
+          <option value="cross_above_200_ema">🎯 Fresh Cross 200 EMA</option>
+        </select>
+        <select id="mits-fresh-sma-select" class="mits-select" style="display: none;">
+          <option value="ALL">All Fresh SMA Cross</option>
+          <option value="cross_above_20_sma">⚡ Fresh Cross 20 SMA</option>
+          <option value="cross_above_50_sma">⚡ Fresh Cross 50 SMA</option>
+          <option value="cross_above_100_sma">⚡ Fresh Cross 100 SMA</option>
+          <option value="cross_above_200_sma">🎯 Fresh Cross 200 SMA</option>
+        </select>
+      </div>
+      <div class="mits-toolbar-actions">
+        <button id="mits-reset-btn" class="mits-btn">Reset Filters</button>
+        <button id="mits-export-btn" class="mits-btn btn-export">
+          <span>⬇ Export CSV</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Pill Sub-Filters -->
+    <div id="mits-pills-container" class="mits-pills-bar">
+      <!-- Dynamic pills inserted here -->
+    </div>
+
+    <!-- Main Sortable Data Table -->
+    <div class="mits-table-container">
+      <div class="mits-table-scroll">
+        <table class="mits-table" id="mits-main-table">
+          <thead id="mits-table-head">
+            <!-- Dynamic Headers based on active Tab -->
+          </thead>
+          <tbody id="mits-table-body">
+            <!-- Dynamic Rows inserted here -->
+          </tbody>
+        </table>
+        <div id="mits-empty-container" class="mits-empty-state" style="display: none;">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3>No Matching Candidates Found</h3>
+          <p>Try modifying your search keywords or clearing sector/pill filters.</p>
+        </div>
+      </div>
+      <div class="mits-table-footer">
+        <div id="mits-showing-count">Showing 0 candidates</div>
+        <div id="mits-data-source-note">⚡ Zero-Server High Performance Client • Powered by MITS Engine V2</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- JavaScript Application Logic (Vanilla ES6+) -->
+<script>
+(function() {
+  'use strict';
+
+  // Comprehensive Inline Fallback Data (ensures 100% immediate rendering even over file:// protocol)
+  const DATA_URL = "https://raw.githubusercontent.com/ganistock-ops/MITS-Free-Scanner-V2/main/data/free_scanner_data.json";
+
+  // State
+  let scannerData = null;
+  let currentTab = 'rs_leaders';
+  let searchTerm = '';
+  let selectedSector = 'ALL';
+  let selectedEmaFilter = 'ALL';
+  let selectedSmaFilter = 'ALL';
+  let selectedFreshEmaFilter = 'ALL';
+  let selectedFreshSmaFilter = 'ALL';
+  let activePill = 'ALL';
+  let sortColumn = null;
+  let sortDirection = 'desc';
+
+  // Tab Definitions and Column Schemas
+  const TAB_DEFINITIONS = {
+    rs_leaders: {
+      name: 'Relative Strength',
+      columns: [
+        { key: 'symbol', label: 'Ticker / Company', sortable: true },
+        { key: 'sector', label: 'Sector', sortable: true },
+        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
+        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
+        { key: 'rs_rating', label: 'RS Rating', sortable: true, align: 'center' },
+        { key: 'mansfield_rs', label: 'Mansfield RS', sortable: true, align: 'right' },
+        { key: 'three_month_status', label: '3M High Status', sortable: true, align: 'center' },
+        { key: 'pivot_status', label: 'Pivot Position', sortable: true, align: 'center' },
+        { key: 'rs_1m', label: '1M RS %', sortable: true, align: 'right' },
+        { key: 'rs_3m', label: '3M RS %', sortable: true, align: 'right' },
+        { key: 'volume_ratio', label: 'Rel Vol', sortable: true, align: 'center' },
+        { key: 'rs_trend', label: 'Strength Status', sortable: true, align: 'left' }
+      ]
+    },
+    breakout: {
+      name: 'VCP Contraction Engine',
+      columns: [
+        { key: 'symbol', label: 'Ticker / Company', sortable: true },
+        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
+        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
+        { key: 'stage', label: 'Contraction Stage', sortable: true, align: 'center' },
+        { key: 'contractions', label: 'Contraction Depth (T-Cycles)', sortable: false, align: 'left' },
+        { key: 'base_pivot', label: 'Base Pivot (₹)', sortable: true, align: 'right' },
+        { key: 'pivot_distance_pct', label: 'Dist to Pivot', sortable: true, align: 'right' },
+        { key: 'vol_ratio', label: 'Vol Multiple', sortable: true, align: 'center' },
+        { key: 'pivot_display', label: 'Classical Pivot Level', sortable: true, align: 'center' },
+        { key: 'quality_grade', label: 'Quality Grade', sortable: true, align: 'center' }
+      ]
+    },
+    high_delivery: {
+      name: 'Institutional High Delivery Accumulation',
+      columns: [
+        { key: 'symbol', label: 'Stock / Company', sortable: true },
+        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
+        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
+        { key: 'quality_grade', label: 'Accumulation Grade', sortable: true, align: 'center' },
+        { key: 'delivery_pct', label: 'Delivery %', sortable: true, align: 'left' },
+        { key: 'vol_multiplier', label: 'Volume Surge', sortable: true, align: 'center' },
+        { key: 'pivot_display', label: 'Classical Pivot Status', sortable: true, align: 'center' }
+      ]
+    },
+    vcp: {
+      name: 'Momentum & Uncharted Highs Breakout Engine',
+      columns: [
+        { key: 'symbol', label: 'Stock / Company', sortable: true },
+        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
+        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
+        { key: 'breakout_type', label: 'Breakout Type', sortable: true, align: 'center' },
+        { key: 'quality_grade', label: 'Quality Grade', sortable: true, align: 'center' },
+        { key: 'vol_multiplier', label: 'Volume Multiplier', sortable: true, align: 'center' },
+        { key: 'pivot_display', label: 'Pivot Level Status', sortable: true, align: 'center' }
+      ]
+    },
+    fifty_two_week_high: {
+      name: 'Moving Average Trend Matrix',
+      columns: [
+        { key: 'symbol', label: 'Stock / Company', sortable: true },
+        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
+        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
+        { key: 'signal_type', label: 'Signal / Trend', sortable: true, align: 'center' },
+        { key: 'dist_50_ema_pct', label: 'Dist to 50 EMA', sortable: true, align: 'right' },
+        { key: 'dist_200_sma_pct', label: 'Dist to 200 SMA', sortable: true, align: 'right' },
+        { key: 'pivot_display', label: 'Pivot Level Status', sortable: true, align: 'center' }
+      ]
+    }
+  };
+
+  // Helper Formatter
+  function formatINR(val) {
+    if (val === undefined || val === null) return '-';
+    return Number(val).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // Load Live Data from GitHub Actions with Instant Local Storage Cache
+  async function initData() {
+    // 1. Instant render from local cache (0-millisecond display)
+    try {
+      const cached = localStorage.getItem('mits_scanner_cache_v2');
+      if (cached) {
+        scannerData = JSON.parse(cached);
+        renderAll();
+      }
+    } catch (e) {}
+
+    // 2. Fetch live data (try relative path first, then raw GitHub URL)
+    const sources = [
+      'data/free_scanner_data.json?t=' + Date.now(),
+      DATA_URL + '?t=' + Date.now()
+    ];
+
+    for (const src of sources) {
+      try {
+        const resp = await fetch(src, { cache: 'no-cache' });
+        if (resp.ok) {
+          const liveData = await resp.json();
+          scannerData = liveData;
+          try { localStorage.setItem('mits_scanner_cache_v2', JSON.stringify(liveData)); } catch (e) {}
+          renderAll();
+          console.log('[MITS Scanner] Live EOD dataset synchronized successfully from', src);
+          break;
+        }
+      } catch (err) {
+        // Try next source
+      }
+    }
+  }
+
+  // Render All Components
+  function renderAll() {
+    renderHeaderStats();
+    renderTabCounters();
+    populateSectorDropdown();
+    renderStageTiles();
+    renderPills();
+    renderTable();
+  }
+
+  // Stage Summary Tiles (Tab 2 VCP)
+  function renderStageTiles() {
+    const container = document.getElementById('mits-stage-tiles-container');
+    if (!container) return;
+
+    if (currentTab !== 'breakout') {
+      container.style.display = 'none';
+      return;
+    }
+
+    const items = (scannerData && scannerData.scanners && scannerData.scanners.breakout) || [];
+    const formingCount = items.filter(x => x.stage === 'Forming').length;
+    const breakoutCount = items.filter(x => x.stage === 'Fresh Breakout').length;
+    const climbingCount = items.filter(x => x.stage === 'Climbing').length;
+
+    container.style.display = 'grid';
+    container.innerHTML = `
+      <div class="mits-stage-card card-breakout ${activePill === 'Fresh Breakout' ? 'active' : ''}" onclick="window.mitsScanner.selectStage('Fresh Breakout')">
+        <div class="mits-stage-card-header">
+          <span class="mits-stage-title">🚀 Fresh Breakouts</span>
+          <span class="mits-stage-count" style="color: #34d399; background: rgba(16, 185, 129, 0.18);">${breakoutCount}</span>
+        </div>
+        <div class="mits-stage-desc">Closed above Base Pivot in last 1-5 sessions • Volume Surge</div>
+      </div>
+      <div class="mits-stage-card card-forming ${activePill === 'Forming' ? 'active' : ''}" onclick="window.mitsScanner.selectStage('Forming')">
+        <div class="mits-stage-card-header">
+          <span class="mits-stage-title">⏳ Forming Base</span>
+          <span class="mits-stage-count" style="color: #fbbf24; background: rgba(245, 158, 11, 0.18);">${formingCount}</span>
+        </div>
+        <div class="mits-stage-desc">Tight final contraction (T3) within 1-4% of Pivot • Low Vol Dry-Up</div>
+      </div>
+      <div class="mits-stage-card card-climbing ${activePill === 'Climbing' ? 'active' : ''}" onclick="window.mitsScanner.selectStage('Climbing')">
+        <div class="mits-stage-card-header">
+          <span class="mits-stage-title">📈 Climbing</span>
+          <span class="mits-stage-count" style="color: #38bdf8; background: rgba(56, 189, 248, 0.18);">${climbingCount}</span>
+        </div>
+        <div class="mits-stage-desc">Gaining +4% to +14% above Pivot • Holding > 10/20 EMA</div>
+      </div>
+    `;
+  }
+
+  // Header Statistics
+  function renderHeaderStats() {
+    if (!scannerData) return;
+    const mb = scannerData.market_breadth;
+    const meta = scannerData.metadata;
+
+    if (meta) {
+      document.getElementById('mits-last-updated').textContent = `Updated: ${meta.generated_at_ist || 'EOD'}`;
+    }
+
+    if (mb) {
+      // Nifty 50
+      const n50 = mb.nifty_50;
+      document.getElementById('nifty50-val').textContent = formatINR(n50.close);
+      const n50Badge = document.getElementById('nifty50-badge');
+      const isN50Pos = n50.change_pct >= 0;
+      n50Badge.textContent = `${isN50Pos ? '+' : ''}${n50.change_pct.toFixed(2)}% (${isN50Pos ? '+' : ''}${n50.change.toFixed(1)})`;
+      n50Badge.className = `mits-card-chg ${isN50Pos ? 'positive' : 'negative'}`;
+      document.getElementById('nifty50-adv').textContent = n50.advances;
+      document.getElementById('nifty50-dec').textContent = n50.declines;
+      const n50AdvPct = (n50.advances / (n50.advances + n50.declines)) * 100;
+      document.getElementById('nifty50-adv-bar').style.width = `${n50AdvPct}%`;
+      document.getElementById('nifty50-dec-bar').style.width = `${100 - n50AdvPct}%`;
+
+      // Nifty 500
+      const n500 = mb.nifty_500;
+      document.getElementById('nifty500-val').textContent = formatINR(n500.close);
+      const n500Badge = document.getElementById('nifty500-badge');
+      const isN500Pos = n500.change_pct >= 0;
+      n500Badge.textContent = `${isN500Pos ? '+' : ''}${n500.change_pct.toFixed(2)}% (${isN500Pos ? '+' : ''}${n500.change.toFixed(1)})`;
+      n500Badge.className = `mits-card-chg ${isN500Pos ? 'positive' : 'negative'}`;
+      document.getElementById('nifty500-adv').textContent = n500.advances;
+      document.getElementById('nifty500-dec').textContent = n500.declines;
+      const n500AdvPct = (n500.advances / (n500.advances + n500.declines)) * 100;
+      document.getElementById('nifty500-adv-bar').style.width = `${n500AdvPct}%`;
+      document.getElementById('nifty500-dec-bar').style.width = `${100 - n500AdvPct}%`;
+
+      // Status
+      document.getElementById('breadth-ratio-val').textContent = `${mb.breadth_ratio} Ratio`;
+      document.getElementById('market-regime-status').textContent = mb.market_status;
+      if (n500.pct_above_200dma) {
+        document.getElementById('pct-above-200dma').textContent = `${n500.pct_above_200dma}%`;
+      }
+    }
+  }
+
+  // Tab Badge Counters
+  function renderTabCounters() {
+    if (!scannerData || !scannerData.scanners) return;
+    for (const [key, items] of Object.entries(scannerData.scanners)) {
+      const el = document.getElementById(`count-${key}`);
+      if (el) el.textContent = items ? items.length : 0;
+    }
+  }
+
+  // Populate Sector Dropdown for Active Tab
+  function populateSectorDropdown() {
+    const select = document.getElementById('mits-sector-select');
+    const items = (scannerData && scannerData.scanners && scannerData.scanners[currentTab]) || [];
+    const sectors = Array.from(new Set(items.map(x => x.sector).filter(Boolean))).sort();
+
+    const previousVal = select.value;
+    select.innerHTML = '<option value="ALL">All Sectors</option>';
+    sectors.forEach(sec => {
+      const opt = document.createElement('option');
+      opt.value = sec;
+      opt.textContent = sec;
+      select.appendChild(opt);
+    });
+
+    if (sectors.includes(previousVal)) {
+      select.value = previousVal;
+      selectedSector = previousVal;
+    } else {
+      select.value = 'ALL';
+      selectedSector = 'ALL';
+    }
+  }
+
+  // Sub-Category Quick Pills
+  function renderPills() {
+    const container = document.getElementById('mits-pills-container');
+    const items = (scannerData && scannerData.scanners && scannerData.scanners[currentTab]) || [];
+    const subCategories = Array.from(new Set(items.map(x => x.sub_category).filter(Boolean))).sort();
+
+    container.innerHTML = '';
+    
+    // Always add ALL pill
+    const allPill = document.createElement('button');
+    allPill.className = `mits-pill ${activePill === 'ALL' ? 'active' : ''}`;
+    allPill.textContent = currentTab === 'rs_leaders' 
+      ? `All RS Leaders (${items.length})` 
+      : (currentTab === 'breakout' 
+          ? `All VCP Candidates (${items.length})` 
+          : (currentTab === 'high_delivery' 
+              ? `All Delivery Picks (${items.length})` 
+              : `All Candidates (${items.length})`));
+    allPill.addEventListener('click', () => {
+      activePill = 'ALL';
+      renderStageTiles();
+      renderPills();
+      renderTable();
+    });
+    container.appendChild(allPill);
+
+    // Tab 1 Specific: Dedicated [🔥 3M Breakout Only] sub-filter button
+    if (currentTab === 'rs_leaders') {
+      const boCount = items.filter(x => x.is_3m_breakout === true).length;
+      const boPill = document.createElement('button');
+      boPill.className = `mits-pill ${activePill === '3M_BREAKOUT' ? 'active' : ''}`;
+      boPill.style.border = activePill === '3M_BREAKOUT' ? '1px solid #10b981' : '1px solid rgba(16, 185, 129, 0.4)';
+      boPill.style.color = activePill === '3M_BREAKOUT' ? '#ffffff' : '#34d399';
+      boPill.textContent = `🔥 3M Breakout Only (${boCount})`;
+      boPill.addEventListener('click', () => {
+        activePill = activePill === '3M_BREAKOUT' ? 'ALL' : '3M_BREAKOUT';
+        renderPills();
+        renderTable();
+      });
+      container.appendChild(boPill);
+    }
+
+    // Tab 2 Specific: Dedicated Stage Pills
+    if (currentTab === 'breakout') {
+      const stagePills = [
+        { key: 'Fresh Breakout', label: '🚀 Fresh Breakouts' },
+        { key: 'Forming', label: '⏳ Forming Base' },
+        { key: 'Climbing', label: '📈 Climbing' }
+      ];
+      stagePills.forEach(sp => {
+        const count = items.filter(x => x.stage === sp.key).length;
+        if (count === 0) return;
+        const pill = document.createElement('button');
+        pill.className = `mits-pill ${activePill === sp.key ? 'active' : ''}`;
+        pill.textContent = `${sp.label} (${count})`;
+        pill.addEventListener('click', () => {
+          activePill = activePill === sp.key ? 'ALL' : sp.key;
+          renderStageTiles();
+          renderPills();
+          renderTable();
+        });
+        container.appendChild(pill);
+      });
+      return;
+    }
+
+    // Tab 3 Specific: Dedicated Filter Badges [All Delivery Picks] | [🔥 Ultra Absorption (A+)] | [🎯 Testing R1/R2]
+    if (currentTab === 'high_delivery') {
+      const ultraCount = items.filter(x => x.quality_grade && x.quality_grade.includes('Ultra Absorption')).length;
+      const r1r2Count = items.filter(x => x.pivot_status && (x.pivot_status.includes('R1') || x.pivot_status.includes('R2'))).length;
+      const highCount = items.filter(x => x.quality_grade && x.quality_grade.includes('High Delivery')).length;
+
+      const delivPills = [
+        { key: 'ULTRA_A_PLUS', label: `🔥 Ultra Absorption (A+) (${ultraCount})`, border: 'rgba(16, 185, 129, 0.4)', color: '#34d399', activeBorder: '#10b981' },
+        { key: 'TESTING_R1_R2', label: `🎯 Testing R1/R2 (${r1r2Count})`, border: 'rgba(0, 240, 255, 0.4)', color: '#00f0ff', activeBorder: '#00f0ff' },
+        { key: 'HIGH_A', label: `High Delivery (A) (${highCount})`, border: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8', activeBorder: '#38bdf8' }
+      ];
+
+      delivPills.forEach(dp => {
+        const btn = document.createElement('button');
+        btn.className = `mits-pill ${activePill === dp.key ? 'active' : ''}`;
+        btn.textContent = dp.label;
+        if (dp.border && activePill !== dp.key) {
+          btn.style.border = `1px solid ${dp.border}`;
+          btn.style.color = dp.color;
+        } else if (dp.activeBorder && activePill === dp.key) {
+          btn.style.borderColor = dp.activeBorder;
+          btn.style.color = '#ffffff';
+        }
+        btn.addEventListener('click', () => {
+          activePill = (activePill === dp.key && dp.key !== 'ALL') ? 'ALL' : dp.key;
+          renderPills();
+          renderTable();
+        });
+        container.appendChild(btn);
+      });
+      return;
+    }
+
+    // Tab 4 Specific: Dedicated Category Filter Pills [All Breakouts] | [🚀 Uncharted Highs] | [🎯 52W High] | [⚡ 20D Range]
+    if (currentTab === 'vcp') {
+      const allCount = items.length;
+      const athCount = items.filter(x => x.sub_category === 'Uncharted Highs' || (x.breakout_type && x.breakout_type.includes('Uncharted'))).length;
+      const w52Count = items.filter(x => x.sub_category === '52W High' || (x.breakout_type && x.breakout_type.includes('52-Week'))).length;
+      const rangeCount = items.filter(x => x.sub_category === '20D Range' || (x.breakout_type && x.breakout_type.includes('20-Day'))).length;
+
+      const breakoutPills = [
+        { key: 'ALL', label: `All Breakouts (${allCount})` },
+        { key: 'Uncharted Highs', label: `🚀 Uncharted Highs (${athCount})`, border: 'rgba(0, 240, 255, 0.45)', color: '#00f0ff', activeBorder: '#00f0ff', isATH: true },
+        { key: '52W High', label: `🎯 52W High (${w52Count})`, border: 'rgba(16, 185, 129, 0.45)', color: '#34d399', activeBorder: '#10b981' },
+        { key: '20D Range', label: `⚡ 20D Range (${rangeCount})`, border: 'rgba(245, 158, 11, 0.45)', color: '#fbbf24', activeBorder: '#f59e0b' }
+      ];
+
+      breakoutPills.forEach(bp => {
+        const btn = document.createElement('button');
+        const isActive = activePill === bp.key;
+        btn.className = `mits-pill ${isActive ? 'active' : ''}`;
+        btn.textContent = bp.label;
+        if (bp.border && !isActive) {
+          btn.style.border = `1px solid ${bp.border}`;
+          btn.style.color = bp.color;
+        } else if (bp.activeBorder && isActive) {
+          btn.style.borderColor = bp.activeBorder;
+          btn.style.color = '#ffffff';
+          if (bp.isATH) {
+            btn.style.background = 'linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%)';
+          }
+        }
+        btn.addEventListener('click', () => {
+          activePill = (activePill === bp.key && bp.key !== 'ALL') ? 'ALL' : bp.key;
+          renderPills();
+          renderTable();
+        });
+        container.appendChild(btn);
+      });
+      return;
+    }
+
+    // Tab 5 Specific: Dedicated Moving Average Trend Quick Tag Pills
+    if (currentTab === 'fifty_two_week_high') {
+      const allCount = items.length;
+      const freshCrossCount = items.filter(x => x.has_fresh_cross === true).length;
+      const momentumCount = items.filter(x => x.is_momentum_cross === true || x.sub_category === '20/50 EMA Cross').length;
+      const goldenCount = items.filter(x => x.is_golden_cross === true || x.sub_category === 'Golden Cross').length;
+      const powerCount = items.filter(x => x.is_power_trend === true || x.sub_category === 'Power Trend').length;
+
+      const trendPills = [
+        { key: 'ALL', label: `All (${allCount})` },
+        { key: 'FRESH_CROSS', label: `🎯 Fresh Cross (${freshCrossCount})`, border: 'rgba(0, 240, 255, 0.45)', color: '#00f0ff', activeBorder: '#00f0ff' },
+        { key: 'MOMENTUM_CROSS', label: `🔥 20/50 EMA Cross (${momentumCount})`, border: 'rgba(56, 189, 248, 0.45)', color: '#38bdf8', activeBorder: '#38bdf8' },
+        { key: 'GOLDEN_CROSS', label: `🏆 Golden Cross (${goldenCount})`, border: 'rgba(245, 158, 11, 0.45)', color: '#fbbf24', activeBorder: '#f59e0b' },
+        { key: 'POWER_TREND', label: `⚡ Power Trend (${powerCount})`, border: 'rgba(16, 185, 129, 0.45)', color: '#34d399', activeBorder: '#10b981' }
+      ];
+
+      trendPills.forEach(tp => {
+        const btn = document.createElement('button');
+        const isActive = activePill === tp.key;
+        btn.className = `mits-pill ${isActive ? 'active' : ''}`;
+        btn.textContent = tp.label;
+        if (tp.border && !isActive) {
+          btn.style.border = `1px solid ${tp.border}`;
+          btn.style.color = tp.color;
+        } else if (tp.activeBorder && isActive) {
+          btn.style.borderColor = tp.activeBorder;
+          btn.style.color = '#ffffff';
+          if (tp.key === 'GOLDEN_CROSS') {
+            btn.style.background = 'rgba(245, 158, 11, 0.2)';
+            btn.style.boxShadow = '0 0 10px rgba(245, 158, 11, 0.3)';
+          } else if (tp.key === 'FRESH_CROSS') {
+            btn.style.background = 'rgba(0, 240, 255, 0.2)';
+            btn.style.boxShadow = '0 0 10px rgba(0, 240, 255, 0.3)';
+          }
+        }
+        btn.addEventListener('click', () => {
+          activePill = (activePill === tp.key && tp.key !== 'ALL') ? 'ALL' : tp.key;
+          renderPills();
+          renderTable();
+        });
+        container.appendChild(btn);
+      });
+      return;
+    }
+
+    subCategories.forEach(sub => {
+      const count = items.filter(x => x.sub_category === sub).length;
+      const pill = document.createElement('button');
+      pill.className = `mits-pill ${activePill === sub ? 'active' : ''}`;
+      pill.textContent = `${sub} (${count})`;
+      pill.addEventListener('click', () => {
+        activePill = sub;
+        renderPills();
+        renderTable();
+      });
+      container.appendChild(pill);
+    });
+  }
+
+  // Filter and Sort Rows
+  function getFilteredData() {
+    if (!scannerData || !scannerData.scanners || !scannerData.scanners[currentTab]) return [];
+    let list = [...scannerData.scanners[currentTab]];
+
+    // Search Filter
+    if (searchTerm.trim()) {
+      const q = searchTerm.toLowerCase().trim();
+      list = list.filter(item => {
+        return (item.symbol && item.symbol.toLowerCase().includes(q)) ||
+               (item.name && item.name.toLowerCase().includes(q)) ||
+               (item.sector && item.sector.toLowerCase().includes(q));
+      });
+    }
+
+    // Sector Filter
+    if (selectedSector !== 'ALL') {
+      list = list.filter(item => item.sector === selectedSector);
+    }
+
+    // EMA Dropdown Filter (Tab 5)
+    if (currentTab === 'fifty_two_week_high' && selectedEmaFilter !== 'ALL') {
+      list = list.filter(item => item[selectedEmaFilter] === true);
+    }
+
+    // SMA Dropdown Filter (Tab 5)
+    if (currentTab === 'fifty_two_week_high' && selectedSmaFilter !== 'ALL') {
+      list = list.filter(item => item[selectedSmaFilter] === true);
+    }
+
+    // Fresh EMA Cross Dropdown Filter (Tab 5)
+    if (currentTab === 'fifty_two_week_high' && selectedFreshEmaFilter !== 'ALL') {
+      list = list.filter(item => item[selectedFreshEmaFilter] === true);
+    }
+
+    // Fresh SMA Cross Dropdown Filter (Tab 5)
+    if (currentTab === 'fifty_two_week_high' && selectedFreshSmaFilter !== 'ALL') {
+      list = list.filter(item => item[selectedFreshSmaFilter] === true);
+    }
+
+    // Pill Sub-category & Stage Filter
+    if (activePill === '3M_BREAKOUT') {
+      list = list.filter(item => item.is_3m_breakout === true);
+    } else if (activePill === 'ULTRA_A_PLUS') {
+      list = list.filter(item => item.quality_grade && item.quality_grade.includes('Ultra Absorption'));
+    } else if (activePill === 'TESTING_R1_R2') {
+      list = list.filter(item => item.pivot_status && (item.pivot_status.includes('R1') || item.pivot_status.includes('R2')));
+    } else if (activePill === 'HIGH_A') {
+      list = list.filter(item => item.quality_grade && item.quality_grade.includes('High Delivery'));
+    } else if (activePill === 'Uncharted Highs') {
+      list = list.filter(item => item.sub_category === 'Uncharted Highs' || (item.breakout_type && item.breakout_type.includes('Uncharted')));
+    } else if (activePill === '52W High') {
+      list = list.filter(item => item.sub_category === '52W High' || (item.breakout_type && item.breakout_type.includes('52-Week')));
+    } else if (activePill === '20D Range') {
+      list = list.filter(item => item.sub_category === '20D Range' || (item.breakout_type && item.breakout_type.includes('20-Day')));
+    } else if (activePill === 'FRESH_CROSS') {
+      list = list.filter(item => item.has_fresh_cross === true);
+    } else if (activePill === 'MOMENTUM_CROSS') {
+      list = list.filter(item => item.is_momentum_cross === true || item.sub_category === '20/50 EMA Cross');
+    } else if (activePill === 'GOLDEN_CROSS') {
+      list = list.filter(item => item.is_golden_cross === true || item.sub_category === 'Golden Cross');
+    } else if (activePill === 'POWER_TREND') {
+      list = list.filter(item => item.is_power_trend === true || item.sub_category === 'Power Trend');
+    } else if (activePill !== 'ALL') {
+      list = list.filter(item => (item.stage === activePill) || (item.sub_category === activePill));
+    }
+
+    // Sort
+    if (sortColumn) {
+      list.sort((a, b) => {
+        let valA = a[sortColumn];
+        let valB = b[sortColumn];
+
+        if (valA === undefined || valA === null) valA = '';
+        if (valB === undefined || valB === null) valB = '';
+
+        if (typeof valA === 'string') {
+          return sortDirection === 'asc' 
+            ? valA.localeCompare(valB) 
+            : valB.localeCompare(valA);
+        } else {
+          return sortDirection === 'asc' 
+            ? valA - valB 
+            : valB - valA;
+        }
+      });
+    }
+
+    return list;
+  }
+
+  // Render Table
+  function renderTable() {
+    const tableHead = document.getElementById('mits-table-head');
+    const tableBody = document.getElementById('mits-table-body');
+    const emptyState = document.getElementById('mits-empty-container');
+    const countLabel = document.getElementById('mits-showing-count');
+    const def = TAB_DEFINITIONS[currentTab];
+
+    if (!def) return;
+
+    // Render Headers
+    tableHead.innerHTML = `
+      <tr>
+        ${def.columns.map(col => {
+          let indicator = '';
+          if (col.sortable) {
+            const isActive = sortColumn === col.key;
+            const arrow = isActive ? (sortDirection === 'asc' ? '▲' : '▼') : '⇅';
+            indicator = `<span class="mits-sort-indicator ${isActive ? 'active' : ''}">${arrow}</span>`;
+          }
+          const alignStyle = col.align ? `text-align: ${col.align};` : '';
+          return `
+            <th class="${col.sortable ? '' : 'no-sort'}" 
+                data-key="${col.key}" 
+                style="${alignStyle}" 
+                ${col.sortable ? `onclick="window.mitsScanner.handleSort('${col.key}')"` : ''}>
+              ${col.label} ${indicator}
+            </th>
+          `;
+        }).join('')}
+      </tr>
+    `;
+
+    const filtered = getFilteredData();
+    countLabel.textContent = `Showing ${filtered.length} candidates in ${def.name}`;
+
+    if (filtered.length === 0) {
+      tableBody.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+
+    // Render Rows
+    tableBody.innerHTML = filtered.map(row => {
+      return `
+        <tr>
+          ${def.columns.map(col => {
+            const alignStyle = col.align ? `style="text-align: ${col.align};"` : '';
+            return `<td ${alignStyle}>${renderCell(currentTab, col.key, row)}</td>`;
+          }).join('')}
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Render Custom Formatted Cells
+  function renderCell(tab, key, row) {
+    const val = row[key];
+
+    // Ticker & Name
+    if (key === 'symbol') {
+      return `
+        <div class="stock-cell">
+          <span class="stock-symbol">${row.symbol}</span>
+          <span class="stock-name" title="${row.name || ''}">${row.name || ''}</span>
+        </div>
+      `;
+    }
+
+    // Sector Badge
+    if (key === 'sector') {
+      return `<span class="sector-badge">${val || '-'}</span>`;
+    }
+
+    // Price
+    if (key === 'price' || key === 'pivot_price' || key === 'ath_price') {
+      return `<span class="price-val">₹${formatINR(val)}</span>`;
+    }
+
+    // Change %
+    if (key === 'change_pct') {
+      const isPos = val >= 0;
+      return `<span class="badge-pct ${isPos ? 'positive' : 'negative'}">${isPos ? '+' : ''}${Number(val).toFixed(2)}%</span>`;
+    }
+
+    // Tab 1: RS Leaders
+    if (tab === 'rs_leaders') {
+      if (key === 'three_month_status') {
+        if (row.is_3m_breakout) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 2px 8px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);">🔥 3M Breakout</span>`;
+        }
+        if (val && val !== '-') {
+          return `<span style="color: #94a3b8; font-size: 11.5px; font-weight: 600;">${val}</span>`;
+        }
+        return `<span style="color: var(--mits-text-faint);">-</span>`;
+      }
+      if (key === 'pivot_status') {
+        if (val === 'Above R2') {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); font-weight: 700;">🚀 Above R2</span>`;
+        } else if (val === 'Above R1') {
+          return `<span class="badge-signal" style="color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 600;">▲ Above R1</span>`;
+        } else if (val === 'Testing R1') {
+          return `<span class="badge-signal" style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); font-weight: 600;">⚡ Testing R1</span>`;
+        } else if (val === 'At Pivot P') {
+          return `<span class="badge-signal" style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); font-weight: 600;">🎯 At Pivot P</span>`;
+        } else if (val === 'Near S1') {
+          return `<span class="badge-signal" style="color: #f87171; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); font-weight: 600;">🛡️ Near S1</span>`;
+        }
+        return `<span class="badge-signal">${val || '-'}</span>`;
+      }
+      if (key === 'rs_rating') {
+        const isElite = val >= 95;
+        return `<span class="badge-rs ${isElite ? 'elite' : ''}">${val}</span>`;
+      }
+      if (key === 'mansfield_rs') {
+        return `<strong style="color: ${val >= 15 ? '#00f0ff' : '#34d399'};">+${Number(val).toFixed(2)}</strong>`;
+      }
+      if (key === 'rs_1m' || key === 'rs_3m') {
+        return `<span style="color: #34d399; font-weight: 600;">+${Number(val).toFixed(1)}%</span>`;
+      }
+      if (key === 'volume_ratio') {
+        return `<span class="badge-pct neutral">${Number(val).toFixed(1)}x</span>`;
+      }
+      if (key === 'rs_trend') {
+        return `<span class="badge-signal bullish">★ ${val}</span>`;
+      }
+    }
+
+    // Tab 2: Breakout
+    // Tab 2: VCP Contraction Engine
+    if (tab === 'breakout') {
+      if (key === 'stage') {
+        if (val === 'Fresh Breakout') {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 3px 8px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);">🚀 Fresh Breakout</span>`;
+        } else if (val === 'Forming') {
+          return `<span class="badge-grade grade-b" style="background: rgba(245, 158, 11, 0.18); border: 1px solid rgba(245, 158, 11, 0.45); color: #fbbf24; font-weight: 700; padding: 3px 8px; border-radius: 4px;">⏳ Forming Base</span>`;
+        } else if (val === 'Climbing') {
+          return `<span class="badge-signal highlight" style="color: #38bdf8; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); font-weight: 700; padding: 3px 8px; border-radius: 4px;">📈 Climbing</span>`;
+        }
+        return `<span class="badge-signal">${val || '-'}</span>`;
+      }
+      if (key === 'contractions') {
+        return `<code style="color: #00f0ff; font-size: 11.5px; background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.2); padding: 3px 7px; border-radius: 4px; font-weight: 600;">${val}</code>`;
+      }
+      if (key === 'base_pivot') {
+        return `<span style="font-weight: 600; color: #e2e8f0;">₹${formatINR(val)}</span>`;
+      }
+      if (key === 'pivot_distance_pct') {
+        const d = Number(val);
+        if (d <= 0.0) {
+          return `<span style="color: #34d399; font-weight: 700;">+${Math.abs(d).toFixed(1)}% (Past Pivot)</span>`;
+        } else if (d <= 2.0) {
+          return `<strong style="color: #00f0ff;">-${d.toFixed(1)}% (Tight)</strong>`;
+        } else {
+          return `<span style="color: #94a3b8;">-${d.toFixed(1)}%</span>`;
+        }
+      }
+      if (key === 'vol_ratio') {
+        const vr = Number(val);
+        if (vr >= 1.35) {
+          return `<strong style="color: #34d399; background: rgba(16, 185, 129, 0.12); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.25);">${vr.toFixed(1)}x Vol</strong>`;
+        } else if (row.is_vdu) {
+          return `<span style="color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2);">${vr.toFixed(1)}x (VDU)</span>`;
+        }
+        return `<span style="color: #94a3b8;">${vr.toFixed(1)}x</span>`;
+      }
+      if (key === 'pivot_display' || key === 'pivot_status') {
+        const text = row.pivot_display || val;
+        const stat = row.pivot_status || val;
+        if (stat === 'Above R2') {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); font-weight: 700;">🚀 ${text}</span>`;
+        } else if (stat === 'Above R1') {
+          return `<span class="badge-signal" style="color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 600;">▲ ${text}</span>`;
+        } else if (stat === 'Testing R1') {
+          return `<span class="badge-signal" style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); font-weight: 600;">⚡ ${text}</span>`;
+        } else if (stat === 'At Pivot P') {
+          return `<span class="badge-signal" style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); font-weight: 600;">🎯 ${text}</span>`;
+        } else if (stat === 'Near S1') {
+          return `<span class="badge-signal" style="color: #f87171; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); font-weight: 600;">🛡️ ${text}</span>`;
+        }
+        return `<span class="badge-signal">${text}</span>`;
+      }
+      if (key === 'quality_grade') {
+        let gradeClass = 'grade-b';
+        if (val === 'A+') gradeClass = 'grade-a-plus';
+        else if (val === 'A') gradeClass = 'grade-a';
+        return `<span class="badge-grade ${gradeClass}">${val}</span>`;
+      }
+    }
+
+    // Tab 3: Institutional High Delivery Accumulation Engine
+    if (tab === 'high_delivery') {
+      if (key === 'quality_grade') {
+        if (val === 'Ultra Absorption (A+)' || (val && val.includes('Ultra Absorption'))) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);">🔥 Ultra Absorption (A+)</span>`;
+        } else {
+          return `<span class="badge-grade grade-a" style="background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); color: #00f0ff; font-weight: 700; padding: 3px 9px; border-radius: 4px;">High Delivery (A)</span>`;
+        }
+      }
+      if (key === 'delivery_pct') {
+        const dVal = Number(val);
+        const barWidth = Math.min(Math.max(dVal, 0), 100);
+        const isUltra = dVal >= 60;
+        const fillGradient = isUltra 
+          ? 'linear-gradient(90deg, #10b981 0%, #00f0ff 100%)' 
+          : 'linear-gradient(90deg, #0284c7 0%, #38bdf8 100%)';
+        return `
+          <div class="delivery-progress-cell" style="display: flex; align-items: center; gap: 8px; min-width: 125px;">
+            <span style="font-weight: 700; width: 46px; color: ${isUltra ? '#34d399' : '#38bdf8'}; font-size: 12.5px;">${dVal.toFixed(1)}%</span>
+            <div class="delivery-progress-bar" style="height: 7px; background: rgba(255, 255, 255, 0.08); border-radius: 4px; overflow: hidden; flex: 1;">
+              <div class="delivery-progress-fill" style="width: ${barWidth}%; background: ${fillGradient}; height: 100%; border-radius: 4px;"></div>
+            </div>
+          </div>
+        `;
+      }
+      if (key === 'vol_multiplier') {
+        const vm = Number(val);
+        const isSurge = vm >= 2.0;
+        return `<strong style="color: ${isSurge ? '#34d399' : '#38bdf8'}; background: ${isSurge ? 'rgba(16, 185, 129, 0.15)' : 'rgba(56, 189, 248, 0.12)'}; padding: 3px 8px; border-radius: 4px; border: 1px solid ${isSurge ? 'rgba(16, 185, 129, 0.35)' : 'rgba(56, 189, 248, 0.25)'}; font-size: 12px;">${vm.toFixed(1)}x Vol</strong>`;
+      }
+      if (key === 'pivot_display' || key === 'pivot_status') {
+        const text = row.pivot_display || val;
+        const stat = row.pivot_status || val;
+        if (stat === 'Above R2') {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); font-weight: 700;">🚀 ${text}</span>`;
+        } else if (stat === 'Above R1') {
+          return `<span class="badge-signal" style="color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 600;">▲ ${text}</span>`;
+        } else if (stat === 'Testing R1') {
+          return `<span class="badge-signal" style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); font-weight: 600;">⚡ ${text}</span>`;
+        } else if (stat === 'At Pivot P') {
+          return `<span class="badge-signal" style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); font-weight: 600;">🎯 ${text}</span>`;
+        } else if (stat === 'Near S1 Support' || stat === 'Near S1') {
+          return `<span class="badge-signal" style="color: #f87171; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); font-weight: 600;">🛡️ ${text}</span>`;
+        }
+        return `<span class="badge-signal">${text}</span>`;
+      }
+    }
+
+    // Tab 4: Momentum & Uncharted Highs Breakout Engine
+    if (tab === 'vcp') {
+      if (key === 'breakout_type') {
+        if (val === 'Uncharted High (ATH)' || (val && val.includes('Uncharted'))) {
+          return `<span class="badge-grade" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.22) 0%, rgba(16, 185, 129, 0.22) 100%); border: 1px solid rgba(0, 240, 255, 0.55); color: #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); text-shadow: 0 0 6px rgba(0, 240, 255, 0.4); white-space: nowrap;">🚀 Uncharted High</span>`;
+        } else if (val === '52-Week High Breakout' || (val && val.includes('52-Week'))) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.25); white-space: nowrap;">🎯 52W High</span>`;
+        } else if (val === '20-Day Range Breakout' || (val && val.includes('20-Day'))) {
+          return `<span class="badge-grade grade-b" style="background: rgba(245, 158, 11, 0.18); border: 1px solid rgba(245, 158, 11, 0.5); color: #fbbf24; font-weight: 700; padding: 3px 9px; border-radius: 4px; white-space: nowrap;">⚡ 20D Range</span>`;
+        }
+        return `<span class="badge-signal">${val || '-'}</span>`;
+      }
+      if (key === 'quality_grade') {
+        if (val === 'A+') {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 3px 10px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);">A+</span>`;
+        } else {
+          return `<span class="badge-grade grade-a" style="background: rgba(56, 189, 248, 0.18); border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; font-weight: 700; padding: 3px 10px; border-radius: 4px;">A</span>`;
+        }
+      }
+      if (key === 'vol_multiplier') {
+        const vm = Number(val);
+        const isSurge = vm >= 2.0;
+        return `<strong style="color: ${isSurge ? '#34d399' : '#38bdf8'}; background: ${isSurge ? 'rgba(16, 185, 129, 0.15)' : 'rgba(56, 189, 248, 0.12)'}; padding: 3px 8px; border-radius: 4px; border: 1px solid ${isSurge ? 'rgba(16, 185, 129, 0.35)' : 'rgba(56, 189, 248, 0.25)'}; font-size: 12px; white-space: nowrap;">${vm.toFixed(1)}x Vol</strong>`;
+      }
+      if (key === 'pivot_display' || key === 'pivot_status') {
+        const text = row.pivot_display || val;
+        const stat = row.pivot_status || val;
+        if (stat === 'Above R2') {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); font-weight: 700; white-space: nowrap;">🚀 ${text}</span>`;
+        } else if (stat === 'Above R1') {
+          return `<span class="badge-signal" style="color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 600; white-space: nowrap;">▲ ${text}</span>`;
+        } else if (stat === 'Testing R1') {
+          return `<span class="badge-signal" style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); font-weight: 600; white-space: nowrap;">⚡ ${text}</span>`;
+        } else if (stat === 'At Pivot P') {
+          return `<span class="badge-signal" style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); font-weight: 600; white-space: nowrap;">🎯 ${text}</span>`;
+        } else if (stat === 'Near S1 Support' || stat === 'Near S1') {
+          return `<span class="badge-signal" style="color: #f87171; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); font-weight: 600; white-space: nowrap;">🛡️ ${text}</span>`;
+        }
+        return `<span class="badge-signal" style="white-space: nowrap;">${text}</span>`;
+      }
+    }
+
+    // Tab 5: Moving Average Trend Matrix
+    if (tab === 'fifty_two_week_high') {
+      if (key === 'signal_type') {
+        const isFreshFilterActive = (selectedFreshEmaFilter !== 'ALL' || selectedFreshSmaFilter !== 'ALL' || activePill === 'FRESH_CROSS');
+        if (row.fresh_cross_badge && (val === 'Fresh Cross' || isFreshFilterActive)) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.35); text-shadow: 0 0 6px rgba(0, 240, 255, 0.4); white-space: nowrap;">${row.fresh_cross_badge}</span>`;
+        } else if (val === 'Golden Cross' || row.is_golden_cross) {
+          return `<span class="badge-grade grade-b" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #fbbf24; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(245, 158, 11, 0.35); text-shadow: 0 0 6px rgba(245, 158, 11, 0.4); white-space: nowrap;">🏆 Golden Cross</span>`;
+        } else if (val === 'Momentum Cross' || row.is_momentum_cross) {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.18); border: 1px solid #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 8px rgba(0, 240, 255, 0.3); white-space: nowrap;">🔥 20/50 Cross</span>`;
+        } else if (val === 'Power Trend' || row.is_power_trend) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 8px rgba(16, 185, 129, 0.25); white-space: nowrap;">⚡ Power Trend</span>`;
+        } else if (row.fresh_cross_badge) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.35); text-shadow: 0 0 6px rgba(0, 240, 255, 0.4); white-space: nowrap;">${row.fresh_cross_badge}</span>`;
+        } else if (val === 'Strong Trend') {
+          return `<span class="badge-grade grade-a" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-weight: 700; padding: 3px 9px; border-radius: 4px; white-space: nowrap;">📈 Strong Trend</span>`;
+        } else {
+          return `<span class="badge-signal" style="color: #94a3b8; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--mits-border); padding: 3px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap;">⏳ Consolidating</span>`;
+        }
+      }
+      if (key === 'dist_50_ema_pct' || key === 'dist_200_sma_pct') {
+        const d = Number(val);
+        const isPos = d >= 0;
+        const color = isPos ? '#34d399' : '#f87171';
+        return `<span style="color: ${color}; font-weight: 600; font-variant-numeric: tabular-nums;">${isPos ? '+' : ''}${d.toFixed(1)}%</span>`;
+      }
+      if (key === 'pivot_display' || key === 'pivot_status') {
+        const text = row.pivot_display || val;
+        const stat = row.pivot_status || val;
+        if (stat === 'Above R2') {
+          return `<span class="badge-signal" style="color: #00f0ff; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); font-weight: 700; white-space: nowrap;">🚀 ${text}</span>`;
+        } else if (stat === 'Above R1') {
+          return `<span class="badge-signal" style="color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 600; white-space: nowrap;">▲ ${text}</span>`;
+        } else if (stat === 'Testing R1') {
+          return `<span class="badge-signal" style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); font-weight: 600; white-space: nowrap;">⚡ ${text}</span>`;
+        } else if (stat === 'At Pivot P') {
+          return `<span class="badge-signal" style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); font-weight: 600; white-space: nowrap;">🎯 ${text}</span>`;
+        } else if (stat === 'Near S1 Support' || stat === 'Near S1') {
+          return `<span class="badge-signal" style="color: #f87171; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); font-weight: 600; white-space: nowrap;">🛡️ ${text}</span>`;
+        }
+        return `<span class="badge-signal" style="white-space: nowrap;">${text}</span>`;
+      }
+    }
+
+    // Fallback
+    return val !== undefined && val !== null ? val : '-';
+  }
+
+  // Export Filtered Table to CSV
+  function exportCSV() {
+    const list = getFilteredData();
+    if (list.length === 0) {
+      alert('No records available to export.');
+      return;
+    }
+
+    const def = TAB_DEFINITIONS[currentTab];
+    const headers = def.columns.map(c => `"${c.label}"`).join(',');
+    const rows = list.map(item => {
+      return def.columns.map(c => {
+        let v = item[c.key];
+        if (v === undefined || v === null) v = '';
+        return `"${String(v).replace(/"/g, '""')}"`;
+      }).join(',');
+    });
+
+    const csvContent = [headers, ...rows].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `MITS_${currentTab}_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Event Listeners Setup
+  function setupEventListeners() {
+    // Tab switching
+    document.querySelectorAll('.mits-tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const tab = this.getAttribute('data-tab');
+        if (tab === currentTab) return;
+
+        document.querySelectorAll('.mits-tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('active');
+        this.setAttribute('aria-selected', 'true');
+
+        currentTab = tab;
+        activePill = 'ALL';
+        selectedEmaFilter = 'ALL';
+        selectedSmaFilter = 'ALL';
+        selectedFreshEmaFilter = 'ALL';
+        selectedFreshSmaFilter = 'ALL';
+        sortColumn = null;
+        sortDirection = 'desc';
+
+        const emaSelect = document.getElementById('mits-ema-select');
+        const smaSelect = document.getElementById('mits-sma-select');
+        const freshEmaSelect = document.getElementById('mits-fresh-ema-select');
+        const freshSmaSelect = document.getElementById('mits-fresh-sma-select');
+        const isTab5 = currentTab === 'fifty_two_week_high';
+        if (emaSelect) {
+          emaSelect.value = 'ALL';
+          emaSelect.style.display = isTab5 ? 'inline-block' : 'none';
+        }
+        if (smaSelect) {
+          smaSelect.value = 'ALL';
+          smaSelect.style.display = isTab5 ? 'inline-block' : 'none';
+        }
+        if (freshEmaSelect) {
+          freshEmaSelect.value = 'ALL';
+          freshEmaSelect.style.display = isTab5 ? 'inline-block' : 'none';
+        }
+        if (freshSmaSelect) {
+          freshSmaSelect.value = 'ALL';
+          freshSmaSelect.style.display = isTab5 ? 'inline-block' : 'none';
+        }
+
+        populateSectorDropdown();
+        renderStageTiles();
+        renderPills();
+        renderTable();
+      });
+    });
+
+    // Instant Search
+    const searchInput = document.getElementById('mits-search-input');
+    searchInput.addEventListener('input', function(e) {
+      searchTerm = e.target.value;
+      renderTable();
+    });
+
+    // Sector Filter
+    const sectorSelect = document.getElementById('mits-sector-select');
+    sectorSelect.addEventListener('change', function(e) {
+      selectedSector = e.target.value;
+      renderTable();
+    });
+
+    // EMA Filter (Tab 5)
+    const emaSelect = document.getElementById('mits-ema-select');
+    if (emaSelect) {
+      emaSelect.addEventListener('change', function(e) {
+        selectedEmaFilter = e.target.value;
+        renderTable();
+      });
+    }
+
+    // SMA Filter (Tab 5)
+    const smaSelect = document.getElementById('mits-sma-select');
+    if (smaSelect) {
+      smaSelect.addEventListener('change', function(e) {
+        selectedSmaFilter = e.target.value;
+        renderTable();
+      });
+    }
+
+    // Fresh EMA Cross Filter (Tab 5)
+    const freshEmaSelect = document.getElementById('mits-fresh-ema-select');
+    if (freshEmaSelect) {
+      freshEmaSelect.addEventListener('change', function(e) {
+        selectedFreshEmaFilter = e.target.value;
+        renderTable();
+      });
+    }
+
+    // Fresh SMA Cross Filter (Tab 5)
+    const freshSmaSelect = document.getElementById('mits-fresh-sma-select');
+    if (freshSmaSelect) {
+      freshSmaSelect.addEventListener('change', function(e) {
+        selectedFreshSmaFilter = e.target.value;
+        renderTable();
+      });
+    }
+
+    // Reset Filters
+    document.getElementById('mits-reset-btn').addEventListener('click', function() {
+      searchTerm = '';
+      selectedSector = 'ALL';
+      selectedEmaFilter = 'ALL';
+      selectedSmaFilter = 'ALL';
+      selectedFreshEmaFilter = 'ALL';
+      selectedFreshSmaFilter = 'ALL';
+      activePill = 'ALL';
+      sortColumn = null;
+      sortDirection = 'desc';
+      document.getElementById('mits-search-input').value = '';
+      document.getElementById('mits-sector-select').value = 'ALL';
+      const emaSel = document.getElementById('mits-ema-select');
+      const smaSel = document.getElementById('mits-sma-select');
+      const freshEmaSel = document.getElementById('mits-fresh-ema-select');
+      const freshSmaSel = document.getElementById('mits-fresh-sma-select');
+      if (emaSel) emaSel.value = 'ALL';
+      if (smaSel) smaSel.value = 'ALL';
+      if (freshEmaSel) freshEmaSel.value = 'ALL';
+      if (freshSmaSel) freshSmaSel.value = 'ALL';
+      renderStageTiles();
+      renderPills();
+      renderTable();
+    });
+
+    // Export CSV
+    document.getElementById('mits-export-btn').addEventListener('click', exportCSV);
+  }
+
+  // Public Handler (accessible via onclick in dynamically rendered th or stage cards)
+  window.mitsScanner = {
+    selectStage: function(stageName) {
+      activePill = activePill === stageName ? 'ALL' : stageName;
+      renderStageTiles();
+      renderPills();
+      renderTable();
+    },
+    handleSort: function(colKey) {
+      if (sortColumn === colKey) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortColumn = colKey;
+        // Default numbers descending, strings ascending
+        const firstVal = scannerData && scannerData.scanners[currentTab] && scannerData.scanners[currentTab][0] 
+          ? scannerData.scanners[currentTab][0][colKey] 
+          : null;
+        sortDirection = (typeof firstVal === 'number') ? 'desc' : 'asc';
+      }
+      renderTable();
+    }
+  };
+
+  // Bootstrap (Universal compatibility for standalone files, modals, and WordPress late-injection)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setupEventListeners();
+      initData();
+    });
+  } else {
+    setupEventListeners();
+    initData();
+  }
+
+})();
+</script>
+</body>
+</html>
