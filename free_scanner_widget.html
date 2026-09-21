@@ -248,9 +248,10 @@
     /* Market Breadth Header Banner */
     .mits-scanner-wrapper .mits-breadth-banner {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 320px 1fr;
       gap: 16px;
       margin-bottom: 24px;
+      align-items: stretch;
     }
 
     .mits-scanner-wrapper .mits-breadth-card {
@@ -261,6 +262,9 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .mits-scanner-wrapper .mits-breadth-card::before {
@@ -347,6 +351,198 @@
 
     .mits-scanner-wrapper .mits-breadth-stats span.adv-text { color: #34d399; }
     .mits-scanner-wrapper .mits-breadth-stats span.dec-text { color: #f87171; }
+
+    /* MITS Pro Quantitative Suite Promo Card */
+    .mits-scanner-wrapper .mits-pro-suite-card {
+      background: linear-gradient(135deg, rgba(14, 21, 38, 0.95) 0%, rgba(19, 29, 53, 0.95) 50%, rgba(12, 18, 34, 0.98) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.22);
+      border-radius: var(--mits-radius-lg);
+      padding: 14px 18px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.05);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-pro-suite-card:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5), 0 0 28px rgba(0, 240, 255, 0.12);
+    }
+
+    .mits-scanner-wrapper .mits-pro-suite-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00f0ff 0%, #38bdf8 30%, #f59e0b 70%, #ffd700 100%);
+    }
+
+    .mits-scanner-wrapper .mits-pro-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mits-scanner-wrapper .mits-pro-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mits-scanner-wrapper .mits-pro-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #00f0ff;
+      filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.8));
+    }
+
+    .mits-scanner-wrapper .mits-pro-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .mits-scanner-wrapper .mits-pro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .mits-scanner-wrapper .mits-pro-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 8px #00f0ff;
+      animation: mits-pulse 2s infinite ease-in-out;
+    }
+
+    /* Pro Suite CTA Button */
+    .mits-scanner-wrapper .mits-pro-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 15px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #b45309 100%);
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35), 0 0 12px rgba(0, 240, 255, 0.2);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mits-scanner-wrapper .mits-pro-cta-btn:hover {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 45%, #f59e0b 100%);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.65), 0 0 28px rgba(245, 158, 11, 0.45);
+      transform: translateY(-1.5px);
+      color: #ffffff !important;
+      text-decoration: none !important;
+    }
+
+    .mits-scanner-wrapper .mits-pro-cta-arrow {
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.25s ease;
+    }
+
+    .mits-scanner-wrapper .mits-pro-cta-btn:hover .mits-pro-cta-arrow {
+      transform: translateX(3px);
+    }
+
+    /* 6 Core Setups Showcase Grid */
+    .mits-scanner-wrapper .mits-pro-setups-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .mits-scanner-wrapper .mits-pro-setup-pill {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 7px;
+      padding: 5px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      transition: all 0.2s ease;
+      min-width: 0;
+    }
+
+    .mits-scanner-wrapper .mits-pro-setup-pill:hover {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(0, 240, 255, 0.35);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(0, 240, 255, 0.12);
+    }
+
+    .mits-scanner-wrapper .mits-setup-pill-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .mits-scanner-wrapper .mits-setup-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .mits-scanner-wrapper .mits-setup-dot.cyan { background: #00f0ff; box-shadow: 0 0 6px rgba(0, 240, 255, 0.7); }
+    .mits-scanner-wrapper .mits-setup-dot.gold { background: #ffd700; box-shadow: 0 0 6px rgba(255, 215, 0, 0.7); }
+    .mits-scanner-wrapper .mits-setup-dot.amber { background: #f59e0b; box-shadow: 0 0 6px rgba(245, 158, 11, 0.7); }
+    .mits-scanner-wrapper .mits-setup-dot.emerald { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.7); }
+    .mits-scanner-wrapper .mits-setup-dot.purple { background: #c084fc; box-shadow: 0 0 6px rgba(192, 132, 252, 0.7); }
+
+    .mits-scanner-wrapper .mits-setup-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mits-scanner-wrapper .mits-setup-desc {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--mits-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 12px;
+    }
 
     /* Scanner Tabs Navigation */
     .mits-scanner-wrapper .mits-tabs-bar {
@@ -1033,10 +1229,10 @@
     /* Tablet & Medium Screens (<= 1024px) */
     @media (max-width: 1024px) {
       .mits-scanner-wrapper .mits-breadth-banner {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
-      .mits-scanner-wrapper .mits-breadth-card:last-child {
-        grid-column: span 2;
+      .mits-scanner-wrapper .mits-pro-setups-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -1090,12 +1286,33 @@
         margin-bottom: 16px;
       }
 
-      .mits-scanner-wrapper .mits-breadth-card:last-child {
-        grid-column: span 1;
-      }
-
       .mits-scanner-wrapper .mits-breadth-card {
         padding: 12px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-suite-card {
+        padding: 12px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-card-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-title-row {
+        justify-content: space-between;
+      }
+
+      .mits-scanner-wrapper .mits-pro-cta-btn {
+        width: 100%;
+        text-align: center;
+        padding: 8px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-setups-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
       }
 
       .mits-scanner-wrapper .mits-card-val {
@@ -1320,9 +1537,9 @@
       </div>
     </header>
 
-    <!-- Nifty 50 & Nifty 500 Market Breadth Banner -->
+    <!-- Nifty 50 Benchmark & MITS Pro Quantitative Suite Banner -->
     <section class="mits-breadth-banner">
-      <!-- Nifty 50 Card -->
+      <!-- Nifty 50 Card (Intact on the left) -->
       <div class="mits-breadth-card">
         <div class="mits-breadth-card-header">
           <span class="mits-card-label">NIFTY 50 BENCHMARK</span>
@@ -1339,37 +1556,65 @@
         </div>
       </div>
 
-      <!-- Nifty 500 Card -->
-      <div class="mits-breadth-card">
-        <div class="mits-breadth-card-header">
-          <span class="mits-card-label">NIFTY 500 BREADTH</span>
-          <span id="nifty500-badge" class="mits-card-chg positive">+0.71%</span>
+      <!-- MITS Pro Quantitative Suite Promo Card (Replacing Cards 2 & 3) -->
+      <div class="mits-breadth-card mits-pro-suite-card">
+        <div class="mits-pro-card-header">
+          <div class="mits-pro-header-left">
+            <div class="mits-pro-title-row">
+              <span class="mits-pro-icon">⚡</span>
+              <span class="mits-pro-title">MITS Pro Quantitative Suite</span>
+              <span class="mits-pro-badge"><span class="mits-pro-badge-dot"></span>INSTITUTIONAL EDGE</span>
+            </div>
+          </div>
+          <a href="https://mits360.co.in/pro-scanner/" target="_blank" rel="noopener noreferrer" class="mits-pro-cta-btn">
+            <span>Unlock Pro Scanner</span>
+            <span class="mits-pro-cta-arrow">→</span>
+          </a>
         </div>
-        <div id="nifty500-val" class="mits-card-val">23,890.15</div>
-        <div class="mits-breadth-ratio-bar">
-          <div id="nifty500-adv-bar" class="mits-breadth-advances" style="width: 65.6%;"></div>
-          <div id="nifty500-dec-bar" class="mits-breadth-declines" style="width: 34.4%;"></div>
-        </div>
-        <div class="mits-breadth-stats">
-          <span class="adv-text">▲ <span id="nifty500-adv">328</span> Advances</span>
-          <span class="dec-text">▼ <span id="nifty500-dec">172</span> Declines</span>
-        </div>
-      </div>
 
-      <!-- Regime & Trend Indicator -->
-      <div class="mits-breadth-card">
-        <div class="mits-breadth-card-header">
-          <span class="mits-card-label">MARKET REGIME & BREADTH</span>
-          <span class="badge-signal bullish" id="market-regime-status">Bullish Confirmation</span>
-        </div>
-        <div id="breadth-ratio-val" class="mits-card-val" style="font-size: 20px; color: #38bdf8;">1.91 : 1 Ratio</div>
-        <div style="margin-top: 10px; font-size: 12px; color: var(--mits-text-muted); display: flex; justify-content: space-between;">
-          <span>Stocks > 200 DMA:</span>
-          <strong id="pct-above-200dma" style="color: #34d399;">74.2%</strong>
-        </div>
-        <div style="margin-top: 4px; font-size: 12px; color: var(--mits-text-muted); display: flex; justify-content: space-between;">
-          <span>Universe Scanned:</span>
-          <strong>500 NSE Equities</strong>
+        <div class="mits-pro-setups-grid">
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot cyan"></span>
+              <span class="mits-setup-name">Bottom Reversal Pro</span>
+            </div>
+            <span class="mits-setup-desc">Exhaustion &amp; Demand Retests</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot gold"></span>
+              <span class="mits-setup-name">Alpha Momentum</span>
+            </div>
+            <span class="mits-setup-desc">Sector Outperformers</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot amber"></span>
+              <span class="mits-setup-name">High Tight Flag</span>
+            </div>
+            <span class="mits-setup-desc">Explosive Contractions</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot emerald"></span>
+              <span class="mits-setup-name">Weekly Swing</span>
+            </div>
+            <span class="mits-setup-desc">High Probability Swings</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot purple"></span>
+              <span class="mits-setup-name">Stage-2 Pullback</span>
+            </div>
+            <span class="mits-setup-desc">Institutional Continuation</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot cyan"></span>
+              <span class="mits-setup-name">DBR Setup</span>
+            </div>
+            <span class="mits-setup-desc">Demand-Base-Rally Engines</span>
+          </div>
         </div>
       </div>
     </section>
@@ -22981,35 +23226,59 @@
     if (mb) {
       // Nifty 50
       const n50 = mb.nifty_50;
-      document.getElementById('nifty50-val').textContent = formatINR(n50.close);
-      const n50Badge = document.getElementById('nifty50-badge');
-      const isN50Pos = n50.change_pct >= 0;
-      n50Badge.textContent = `${isN50Pos ? '+' : ''}${n50.change_pct.toFixed(2)}% (${isN50Pos ? '+' : ''}${n50.change.toFixed(1)})`;
-      n50Badge.className = `mits-card-chg ${isN50Pos ? 'positive' : 'negative'}`;
-      document.getElementById('nifty50-adv').textContent = n50.advances;
-      document.getElementById('nifty50-dec').textContent = n50.declines;
-      const n50AdvPct = (n50.advances / (n50.advances + n50.declines)) * 100;
-      document.getElementById('nifty50-adv-bar').style.width = `${n50AdvPct}%`;
-      document.getElementById('nifty50-dec-bar').style.width = `${100 - n50AdvPct}%`;
+      if (n50) {
+        const valEl = document.getElementById('nifty50-val');
+        if (valEl) valEl.textContent = formatINR(n50.close);
+        const n50Badge = document.getElementById('nifty50-badge');
+        const isN50Pos = n50.change_pct >= 0;
+        if (n50Badge) {
+          n50Badge.textContent = `${isN50Pos ? '+' : ''}${n50.change_pct.toFixed(2)}% (${isN50Pos ? '+' : ''}${n50.change.toFixed(1)})`;
+          n50Badge.className = `mits-card-chg ${isN50Pos ? 'positive' : 'negative'}`;
+        }
+        const advEl = document.getElementById('nifty50-adv');
+        if (advEl) advEl.textContent = n50.advances;
+        const decEl = document.getElementById('nifty50-dec');
+        if (decEl) decEl.textContent = n50.declines;
+        const advBar = document.getElementById('nifty50-adv-bar');
+        const decBar = document.getElementById('nifty50-dec-bar');
+        if (advBar && decBar) {
+          const n50AdvPct = (n50.advances / (n50.advances + n50.declines)) * 100;
+          advBar.style.width = `${n50AdvPct}%`;
+          decBar.style.width = `${100 - n50AdvPct}%`;
+        }
+      }
 
-      // Nifty 500
+      // Safe checks for legacy breadth card elements if present
       const n500 = mb.nifty_500;
-      document.getElementById('nifty500-val').textContent = formatINR(n500.close);
-      const n500Badge = document.getElementById('nifty500-badge');
-      const isN500Pos = n500.change_pct >= 0;
-      n500Badge.textContent = `${isN500Pos ? '+' : ''}${n500.change_pct.toFixed(2)}% (${isN500Pos ? '+' : ''}${n500.change.toFixed(1)})`;
-      n500Badge.className = `mits-card-chg ${isN500Pos ? 'positive' : 'negative'}`;
-      document.getElementById('nifty500-adv').textContent = n500.advances;
-      document.getElementById('nifty500-dec').textContent = n500.declines;
-      const n500AdvPct = (n500.advances / (n500.advances + n500.declines)) * 100;
-      document.getElementById('nifty500-adv-bar').style.width = `${n500AdvPct}%`;
-      document.getElementById('nifty500-dec-bar').style.width = `${100 - n500AdvPct}%`;
+      if (n500) {
+        const n500Val = document.getElementById('nifty500-val');
+        if (n500Val) n500Val.textContent = formatINR(n500.close);
+        const n500Badge = document.getElementById('nifty500-badge');
+        const isN500Pos = n500.change_pct >= 0;
+        if (n500Badge) {
+          n500Badge.textContent = `${isN500Pos ? '+' : ''}${n500.change_pct.toFixed(2)}% (${isN500Pos ? '+' : ''}${n500.change.toFixed(1)})`;
+          n500Badge.className = `mits-card-chg ${isN500Pos ? 'positive' : 'negative'}`;
+        }
+        const n500Adv = document.getElementById('nifty500-adv');
+        if (n500Adv) n500Adv.textContent = n500.advances;
+        const n500Dec = document.getElementById('nifty500-dec');
+        if (n500Dec) n500Dec.textContent = n500.declines;
+        const n500AdvBar = document.getElementById('nifty500-adv-bar');
+        const n500DecBar = document.getElementById('nifty500-dec-bar');
+        if (n500AdvBar && n500DecBar) {
+          const n500AdvPct = (n500.advances / (n500.advances + n500.declines)) * 100;
+          n500AdvBar.style.width = `${n500AdvPct}%`;
+          n500DecBar.style.width = `${100 - n500AdvPct}%`;
+        }
+      }
 
-      // Status
-      document.getElementById('breadth-ratio-val').textContent = `${mb.breadth_ratio} Ratio`;
-      document.getElementById('market-regime-status').textContent = mb.market_status;
-      if (n500.pct_above_200dma) {
-        document.getElementById('pct-above-200dma').textContent = `${n500.pct_above_200dma}%`;
+      const ratioVal = document.getElementById('breadth-ratio-val');
+      if (ratioVal) ratioVal.textContent = `${mb.breadth_ratio} Ratio`;
+      const statusVal = document.getElementById('market-regime-status');
+      if (statusVal) statusVal.textContent = mb.market_status;
+      const pct200 = document.getElementById('pct-above-200dma');
+      if (pct200 && n500 && n500.pct_above_200dma) {
+        pct200.textContent = `${n500.pct_above_200dma}%`;
       }
     }
   }
