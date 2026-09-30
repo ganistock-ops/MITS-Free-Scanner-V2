@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-09-30 14:07:19 IST",
+    "generated_at_ist": "2026-09-30 16:29:01 IST",
     "trading_date": "2026-09-30",
     "engine_version": "2.0.0",
     "status": "COMPLETED",
@@ -20,11 +20,11 @@
       "change": -110.11,
       "change_pct": -0.44,
       "advances": 262,
-      "declines": 233,
+      "declines": 232,
       "pct_above_200dma": 42.3
     },
     "market_status": "Mildly Bullish",
-    "breadth_ratio": "1.12 : 1"
+    "breadth_ratio": "1.13 : 1"
   },
   "summary_counts": {
     "rs_leaders": 69,
