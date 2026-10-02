@@ -502,10 +502,10 @@
       background: rgba(15, 23, 42, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 7px;
-      padding: 5px 9px;
+      padding: 6px 9px 7px;
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: 2px;
       transition: all 0.2s ease;
       min-width: 0;
     }
@@ -554,6 +554,33 @@
       overflow: hidden;
       text-overflow: ellipsis;
       padding-left: 12px;
+    }
+
+    /* Compact Inline Win Rate & Rank Badges */
+    .mits-scanner-wrapper .mits-setup-inline-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 6px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      color: #facc15;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      border-radius: 9999px;
+      box-shadow: 0 0 6px rgba(250, 204, 21, 0.15);
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      transition: all 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-pro-setup-pill:hover .mits-setup-inline-badge {
+      border-color: rgba(250, 204, 21, 0.65);
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+      background: rgba(30, 41, 59, 0.95);
     }
 
     /* Scanner Tabs Navigation */
@@ -1215,6 +1242,104 @@
       color: var(--mits-text-muted);
     }
 
+    /* Pagination Navigation Bar */
+    .mits-scanner-wrapper .mits-pagination-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 18px;
+      background: rgba(15, 23, 42, 0.85);
+      border-top: 1px solid var(--mits-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mits-scanner-wrapper .mits-pagination-info {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--mits-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mits-scanner-wrapper .mits-pagination-info strong {
+      color: #f1f5f9;
+      font-weight: 700;
+    }
+
+    .mits-scanner-wrapper .mits-pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mits-scanner-wrapper .mits-page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 34px;
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--mits-text-main);
+      background: #0f172a;
+      border: 1px solid var(--mits-border);
+      border-radius: var(--mits-radius-sm);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .mits-scanner-wrapper .mits-page-btn:hover:not(:disabled) {
+      background: #1e293b;
+      border-color: rgba(250, 204, 21, 0.45);
+      color: #facc15;
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .mits-scanner-wrapper .mits-page-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(250, 204, 21, 0.25) 100%) !important;
+      border-color: #10b981 !important;
+      color: #00f59b !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35) !important;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .mits-scanner-wrapper .mits-page-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.05);
+      background: #0b1120;
+      color: var(--mits-text-faint);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .mits-scanner-wrapper .mits-page-ellipsis {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 34px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mits-text-faint);
+      user-select: none;
+    }
+
+    .mits-scanner-wrapper .mits-page-nav-btn {
+      padding: 0 12px;
+      font-weight: 600;
+    }
+
     .mits-scanner-wrapper .mits-empty-state {
       text-align: center;
       padding: 50px 20px;
@@ -1232,6 +1357,163 @@
       font-size: 16px;
       color: #ffffff;
       margin: 0 0 6px 0 !important;
+    }
+
+    /* MITS Pro Feature Teaser Card */
+    .mits-scanner-wrapper .mits-pro-teaser-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 18px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(245, 158, 11, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .mits-scanner-wrapper .mits-pro-teaser-card:hover {
+      border-color: rgba(250, 204, 21, 0.55);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .mits-scanner-wrapper .mits-pro-teaser-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #f59e0b 0%, #00f0ff 50%, #10b981 100%);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .mits-scanner-wrapper .mits-teaser-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #facc15;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-preview-wrap {
+      position: relative;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(10, 16, 30, 0.6);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      padding: 14px 16px;
+    }
+
+    .mits-scanner-wrapper .mits-teaser-blurred-content {
+      filter: blur(2.5px);
+      opacity: 0.75;
+      user-select: none;
+      pointer-events: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row .mock-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row .mock-tag.gold {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row .mock-tag.cyan {
+      background: rgba(0, 240, 255, 0.2);
+      color: #00f0ff;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row .mock-tag.emerald {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-mock-row .mock-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mits-scanner-wrapper .mits-teaser-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      z-index: 2;
+      background: radial-gradient(circle, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.6) 100%);
+    }
+
+    .mits-scanner-wrapper .pro-teaser-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000000 !important;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .mits-scanner-wrapper .pro-teaser-btn:hover {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #000000 !important;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.55), 0 0 15px rgba(250, 204, 21, 0.4);
     }
 
     /* ==========================================================================
@@ -1500,12 +1782,64 @@
         padding: 10px 14px;
         font-size: 11px;
       }
+
+      /* Responsive Pagination */
+      .mits-scanner-wrapper .mits-pagination-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-pagination-info {
+        text-align: center;
+        font-size: 11.5px;
+      }
+
+      .mits-scanner-wrapper .mits-pagination-controls {
+        justify-content: center;
+        gap: 4px;
+      }
+
+      .mits-scanner-wrapper .mits-page-btn {
+        min-width: 30px;
+        height: 30px;
+        font-size: 11px;
+        padding: 0 6px;
+      }
+
+      .mits-scanner-wrapper .mits-page-nav-btn {
+        padding: 0 8px;
+      }
+
+      /* Responsive Pro Teaser Card */
+      .mits-scanner-wrapper .mits-pro-teaser-card {
+        padding: 16px 14px;
+        margin-top: 14px;
+      }
+
+      .mits-scanner-wrapper .mits-teaser-title {
+        font-size: 11.5px;
+      }
+
+      .mits-scanner-wrapper .pro-teaser-btn {
+        font-size: 0.82rem;
+        padding: 10px 16px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.35;
+      }
     }
 
     /* Extra Small Phones (<= 480px) */
     @media (max-width: 480px) {
       .mits-scanner-wrapper {
         padding: 10px 6px 24px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-setups-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
 
       .mits-scanner-wrapper .mits-table-container {
@@ -1522,6 +1856,22 @@
 
       .mits-scanner-wrapper .stock-name {
         max-width: 95px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-teaser-card {
+        padding: 14px 10px;
+        border-radius: 10px;
+      }
+
+      .mits-scanner-wrapper .mits-teaser-title {
+        font-size: 11px;
+        line-height: 1.4;
+      }
+
+      .mits-scanner-wrapper .pro-teaser-btn {
+        font-size: 0.78rem;
+        padding: 9px 12px;
+        width: 100%;
       }
     }
   </style>
@@ -1577,7 +1927,7 @@
               <span class="mits-pro-badge"><span class="mits-pro-badge-dot"></span>INSTITUTIONAL EDGE</span>
             </div>
           </div>
-          <a href="https://mits360.co.in/pro-scanner/" target="_blank" rel="noopener noreferrer" class="mits-pro-cta-btn">
+          <a href="https://mits360.co.in/pro-suite-landing-page/" target="_blank" rel="noopener noreferrer" class="mits-pro-cta-btn">
             <span>Unlock Pro Scanner</span>
             <span class="mits-pro-cta-arrow">→</span>
           </a>
@@ -1586,45 +1936,51 @@
         <div class="mits-pro-setups-grid">
           <div class="mits-pro-setup-pill">
             <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot cyan"></span>
-              <span class="mits-setup-name">Bottom Reversal Pro</span>
-            </div>
-            <span class="mits-setup-desc">Exhaustion &amp; Demand Retests</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot gold"></span>
-              <span class="mits-setup-name">Alpha Momentum</span>
-            </div>
-            <span class="mits-setup-desc">Sector Outperformers</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
               <span class="mits-setup-dot amber"></span>
               <span class="mits-setup-name">High Tight Flag</span>
+              <span class="mits-setup-inline-badge">🥇 #1 Edge: 72.9% Win</span>
             </div>
             <span class="mits-setup-desc">Explosive Contractions</span>
           </div>
           <div class="mits-pro-setup-pill">
             <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot emerald"></span>
-              <span class="mits-setup-name">Weekly Swing</span>
+              <span class="mits-setup-dot gold"></span>
+              <span class="mits-setup-name">Alpha Momentum</span>
+              <span class="mits-setup-inline-badge">🥈 #2 Edge: 70.5% Win</span>
             </div>
-            <span class="mits-setup-desc">High Probability Swings</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot purple"></span>
-              <span class="mits-setup-name">Stage-2 Pullback</span>
-            </div>
-            <span class="mits-setup-desc">Institutional Continuation</span>
+            <span class="mits-setup-desc">Sector Outperformers</span>
           </div>
           <div class="mits-pro-setup-pill">
             <div class="mits-setup-pill-header">
               <span class="mits-setup-dot cyan"></span>
               <span class="mits-setup-name">DBR Setup</span>
+              <span class="mits-setup-inline-badge">🥉 #3 Edge: 67.0% Win</span>
             </div>
             <span class="mits-setup-desc">Demand-Base-Rally Engines</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot purple"></span>
+              <span class="mits-setup-name">Stage-2 Pullback</span>
+              <span class="mits-setup-inline-badge">⚡ 63.1% Win</span>
+            </div>
+            <span class="mits-setup-desc">Institutional Continuation</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot emerald"></span>
+              <span class="mits-setup-name">Weekly Swing</span>
+              <span class="mits-setup-inline-badge">⚡ 60.5% Win</span>
+            </div>
+            <span class="mits-setup-desc">High Probability Swings</span>
+          </div>
+          <div class="mits-pro-setup-pill">
+            <div class="mits-setup-pill-header">
+              <span class="mits-setup-dot cyan"></span>
+              <span class="mits-setup-name">Bottom Reversal Pro</span>
+              <span class="mits-setup-inline-badge">⚡ 51.1% Win</span>
+            </div>
+            <span class="mits-setup-desc">Exhaustion &amp; Demand Retests</span>
           </div>
         </div>
       </div>
@@ -1728,9 +2084,49 @@
           <p>Try modifying your search keywords or clearing sector/pill filters.</p>
         </div>
       </div>
+      <!-- Pagination Navigation UI -->
+      <div id="mits-pagination-container" class="mits-pagination-bar" style="display: none;">
+        <div class="mits-pagination-info" id="mits-pagination-info"></div>
+        <div class="mits-pagination-controls" id="mits-pagination-controls"></div>
+      </div>
       <div class="mits-table-footer">
         <div id="mits-showing-count">Showing 0 candidates</div>
         <div id="mits-data-source-note">⚡ Zero-Server High Performance Client • Powered by MITS Engine V2</div>
+      </div>
+    </div>
+
+    <!-- MITS Pro Feature Teaser Card -->
+    <div class="mits-pro-teaser-card">
+      <div class="mits-teaser-header">
+        <span class="mits-teaser-title">💎 INSTITUTIONAL EDGE: MITS PRO MULTI-TIMEFRAME QUANT CONFLUENCE</span>
+      </div>
+      <div class="mits-teaser-preview-wrap">
+        <div class="mits-teaser-blurred-content" aria-hidden="true">
+          <div class="mits-teaser-mock-row">
+            <span class="mock-item">Accumulation Zone: ₹1,420 - ₹1,438</span>
+            <span class="mock-sep">|</span>
+            <span class="mock-item">Invalidation Level: ₹1,385</span>
+            <span class="mock-sep">|</span>
+            <span class="mock-item">Institutional Alpha Score: 94.2</span>
+          </div>
+          <div class="mits-teaser-mock-row">
+            <span class="mock-item">Volume Surge: +340%</span>
+            <span class="mock-sep">|</span>
+            <span class="mock-item">Smart Money Flow: Extreme Inflow</span>
+            <span class="mock-sep">|</span>
+            <span class="mock-item">Risk/Reward Ratio: 1:3.4</span>
+          </div>
+          <div class="mits-teaser-mock-row">
+            <span class="mock-item">Stage-2 Momentum Confirmation</span>
+            <span class="mock-sep">|</span>
+            <span class="mock-item">Multi-Timeframe Trend Matrix: 4/4 Bullish</span>
+          </div>
+        </div>
+        <div class="mits-teaser-overlay">
+          <a href="https://mits360.co.in/pro-suite-landing-page/" target="_blank" rel="noopener noreferrer" class="pro-teaser-btn">
+            🔒 Unlock Pro Quantitative Analytics &amp; Institutional Confluence →
+          </a>
+        </div>
       </div>
     </div>
 
@@ -1757,6 +2153,8 @@
   let activePill = 'ALL';
   let sortColumn = null;
   let sortDirection = 'desc';
+  let currentPage = 1;
+  const rowsPerPage = 10;
 
   // Tab Definitions and Column Schemas
   const TAB_DEFINITIONS = {
@@ -2036,6 +2434,7 @@
               : `All Candidates (${items.length})`));
     allPill.addEventListener('click', () => {
       activePill = 'ALL';
+      currentPage = 1;
       renderStageTiles();
       renderPills();
       renderTable();
@@ -2052,6 +2451,7 @@
       boPill.textContent = `🔥 3M Breakout Only (${boCount})`;
       boPill.addEventListener('click', () => {
         activePill = activePill === '3M_BREAKOUT' ? 'ALL' : '3M_BREAKOUT';
+        currentPage = 1;
         renderPills();
         renderTable();
       });
@@ -2073,6 +2473,7 @@
         pill.textContent = `${sp.label} (${count})`;
         pill.addEventListener('click', () => {
           activePill = activePill === sp.key ? 'ALL' : sp.key;
+          currentPage = 1;
           renderStageTiles();
           renderPills();
           renderTable();
@@ -2107,6 +2508,7 @@
         }
         btn.addEventListener('click', () => {
           activePill = (activePill === dp.key && dp.key !== 'ALL') ? 'ALL' : dp.key;
+          currentPage = 1;
           renderPills();
           renderTable();
         });
@@ -2146,6 +2548,7 @@
         }
         btn.addEventListener('click', () => {
           activePill = (activePill === bp.key && bp.key !== 'ALL') ? 'ALL' : bp.key;
+          currentPage = 1;
           renderPills();
           renderTable();
         });
@@ -2191,6 +2594,7 @@
         }
         btn.addEventListener('click', () => {
           activePill = (activePill === tp.key && tp.key !== 'ALL') ? 'ALL' : tp.key;
+          currentPage = 1;
           renderPills();
           renderTable();
         });
@@ -2206,6 +2610,7 @@
       pill.textContent = `${sub} (${count})`;
       pill.addEventListener('click', () => {
         activePill = sub;
+        currentPage = 1;
         renderPills();
         renderTable();
       });
@@ -2338,18 +2743,35 @@
     `;
 
     const filtered = getFilteredData();
-    countLabel.textContent = `Showing ${filtered.length} candidates in ${def.name}`;
+    const totalRows = filtered.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
 
-    if (filtered.length === 0) {
+    // Boundary check for currentPage
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
+    }
+    if (currentPage < 1) {
+      currentPage = 1;
+    }
+
+    countLabel.textContent = `Showing ${totalRows} candidates in ${def.name}`;
+
+    if (totalRows === 0) {
       tableBody.innerHTML = '';
       emptyState.style.display = 'block';
+      renderPagination(0, 0);
       return;
     }
 
     emptyState.style.display = 'none';
 
+    // Slice Paginated Rows (10 per page)
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
+    const paginatedData = filtered.slice(startIndex, endIndex);
+
     // Render Rows
-    tableBody.innerHTML = filtered.map(row => {
+    tableBody.innerHTML = paginatedData.map(row => {
       return `
         <tr>
           ${def.columns.map(col => {
@@ -2359,6 +2781,63 @@
         </tr>
       `;
     }).join('');
+
+    // Render Pagination Controls
+    renderPagination(totalRows, totalPages);
+  }
+
+  // Render Pagination Navigation UI
+  function renderPagination(totalRows, totalPages) {
+    const container = document.getElementById('mits-pagination-container');
+    const infoEl = document.getElementById('mits-pagination-info');
+    const controlsEl = document.getElementById('mits-pagination-controls');
+    if (!container || !infoEl || !controlsEl) return;
+
+    if (totalRows === 0) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'flex';
+
+    const start = (currentPage - 1) * rowsPerPage + 1;
+    const end = Math.min(currentPage * rowsPerPage, totalRows);
+    infoEl.innerHTML = `Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${totalRows}</strong> stocks`;
+
+    let html = '';
+
+    // Prev Button
+    const prevDisabled = currentPage <= 1 ? 'disabled' : '';
+    html += `<button class="mits-page-btn mits-page-nav-btn" ${prevDisabled} onclick="window.mitsScanner.changePage(${currentPage - 1})" aria-label="Previous Page">‹ Prev</button>`;
+
+    // Page Numbers Algorithm (Compact Windowing)
+    const pages = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 4) {
+        pages.push(1, 2, 3, 4, 5, '...', totalPages);
+      } else if (currentPage >= totalPages - 3) {
+        pages.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+      }
+    }
+
+    pages.forEach(p => {
+      if (p === '...') {
+        html += `<span class="mits-page-ellipsis">…</span>`;
+      } else {
+        const isActive = p === currentPage ? 'active' : '';
+        html += `<button class="mits-page-btn ${isActive}" onclick="window.mitsScanner.changePage(${p})" ${p === currentPage ? 'disabled' : ''}>${p}</button>`;
+      }
+    });
+
+    // Next Button
+    const nextDisabled = currentPage >= totalPages ? 'disabled' : '';
+    html += `<button class="mits-page-btn mits-page-nav-btn" ${nextDisabled} onclick="window.mitsScanner.changePage(${currentPage + 1})" aria-label="Next Page">Next ›</button>`;
+
+    controlsEl.innerHTML = html;
   }
 
   // Render Custom Formatted Cells
@@ -2679,6 +3158,7 @@
         this.setAttribute('aria-selected', 'true');
 
         currentTab = tab;
+        currentPage = 1;
         activePill = 'ALL';
         selectedEmaFilter = 'ALL';
         selectedSmaFilter = 'ALL';
@@ -2720,6 +3200,7 @@
     const searchInput = document.getElementById('mits-search-input');
     searchInput.addEventListener('input', function(e) {
       searchTerm = e.target.value;
+      currentPage = 1;
       renderTable();
     });
 
@@ -2727,6 +3208,7 @@
     const sectorSelect = document.getElementById('mits-sector-select');
     sectorSelect.addEventListener('change', function(e) {
       selectedSector = e.target.value;
+      currentPage = 1;
       renderTable();
     });
 
@@ -2735,6 +3217,7 @@
     if (emaSelect) {
       emaSelect.addEventListener('change', function(e) {
         selectedEmaFilter = e.target.value;
+        currentPage = 1;
         renderTable();
       });
     }
@@ -2744,6 +3227,7 @@
     if (smaSelect) {
       smaSelect.addEventListener('change', function(e) {
         selectedSmaFilter = e.target.value;
+        currentPage = 1;
         renderTable();
       });
     }
@@ -2753,6 +3237,7 @@
     if (freshEmaSelect) {
       freshEmaSelect.addEventListener('change', function(e) {
         selectedFreshEmaFilter = e.target.value;
+        currentPage = 1;
         renderTable();
       });
     }
@@ -2762,6 +3247,7 @@
     if (freshSmaSelect) {
       freshSmaSelect.addEventListener('change', function(e) {
         selectedFreshSmaFilter = e.target.value;
+        currentPage = 1;
         renderTable();
       });
     }
@@ -2777,6 +3263,7 @@
       activePill = 'ALL';
       sortColumn = null;
       sortDirection = 'desc';
+      currentPage = 1;
       document.getElementById('mits-search-input').value = '';
       document.getElementById('mits-sector-select').value = 'ALL';
       const emaSel = document.getElementById('mits-ema-select');
@@ -2798,13 +3285,29 @@
 
   // Public Handler (accessible via onclick in dynamically rendered th or stage cards)
   window.mitsScanner = {
+    changePage: function(newPage) {
+      const filtered = getFilteredData();
+      const totalPages = Math.ceil(filtered.length / rowsPerPage) || 1;
+      if (newPage < 1 || newPage > totalPages || newPage === currentPage) return;
+      currentPage = newPage;
+      renderTable();
+      const tableEl = document.getElementById('mits-main-table');
+      if (tableEl) {
+        const rect = tableEl.getBoundingClientRect();
+        if (rect.top < 0) {
+          tableEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    },
     selectStage: function(stageName) {
       activePill = activePill === stageName ? 'ALL' : stageName;
+      currentPage = 1;
       renderStageTiles();
       renderPills();
       renderTable();
     },
     handleSort: function(colKey) {
+      currentPage = 1;
       if (sortColumn === colKey) {
         sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
       } else {
