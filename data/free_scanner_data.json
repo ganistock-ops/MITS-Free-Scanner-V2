@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-10-13 18:03:30 IST",
+    "generated_at_ist": "2026-10-13 18:26:22 IST",
     "trading_date": "2026-10-13",
     "engine_version": "2.0.0",
     "status": "COMPLETED",
@@ -2589,7 +2589,7 @@
         "pivot_r1": 2211.33,
         "pivot_r2": 2266.67,
         "pivot_s1": 2093.33,
-        "ath_price": 4166.67,
+        "ath_price": 4166.66,
         "high_52w": 3204.28,
         "range_20d_pct": 10.76,
         "sub_category": "20D Range"
