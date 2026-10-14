@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-10-14 15:45:29 IST",
+    "generated_at_ist": "2026-10-14 15:53:43 IST",
     "trading_date": "2026-10-14",
     "engine_version": "2.0.0",
     "status": "COMPLETED",
@@ -13,18 +13,18 @@
       "change": -99.25,
       "change_pct": -0.44,
       "advances": 24,
-      "declines": 25
+      "declines": 26
     },
     "nifty_500": {
       "close": 21265.34,
       "change": -114.14,
       "change_pct": -0.46,
       "advances": 244,
-      "declines": 255,
+      "declines": 256,
       "pct_above_200dma": 40.9
     },
     "market_status": "Neutral Consolidation",
-    "breadth_ratio": "0.96 : 1"
+    "breadth_ratio": "0.95 : 1"
   },
   "summary_counts": {
     "rs_leaders": 76,
