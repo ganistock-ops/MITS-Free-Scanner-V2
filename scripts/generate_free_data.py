@@ -252,11 +252,16 @@ def fetch_official_delivery_data(smartapi_connected: bool, symbols: List[str]) -
             logger.debug(f"Attempt for {date_str} returned: {e}")
 
     # Fallback to local cache if download failed
+    used_cached_fallback = False
     if not downloaded_content and os.path.exists(cache_file):
         try:
             with open(cache_file, "r", encoding="utf-8") as f:
                 downloaded_content = f.read()
-            logger.info(f"Loaded official NSE delivery data from cache: {cache_file}")
+            used_cached_fallback = True
+            logger.warning(
+                f"NSE official Bhavcopy live download failed/timed out. Falling back to local cache: {cache_file}. "
+                f"WARNING: Cached delivery data may be outdated!"
+            )
         except Exception as err:
             logger.warning(f"Error reading delivery cache: {err}")
 
@@ -269,6 +274,10 @@ def fetch_official_delivery_data(smartapi_connected: bool, symbols: List[str]) -
                 df["SYMBOL"] = df["SYMBOL"].astype(str).str.strip()
                 df["SERIES"] = df["SERIES"].astype(str).str.strip()
                 eq_df = df[df["SERIES"] == "EQ"]
+
+                cached_date_str = eq_df["DATE1"].iloc[0] if ("DATE1" in eq_df.columns and len(eq_df) > 0) else "Unknown"
+                if used_cached_fallback:
+                    logger.warning(f"Using cached delivery bhavdata dated {cached_date_str}. Note: Fresh NSE delivery data was unavailable.")
 
                 for _, row in eq_df.iterrows():
                     sym = row["SYMBOL"]
@@ -289,9 +298,9 @@ def fetch_official_delivery_data(smartapi_connected: bool, symbols: List[str]) -
                         "delivery_pct": d_pct,
                         "delivery_qty": d_qty,
                         "trade_qty": t_qty,
-                        "is_official": True
+                        "is_official": not used_cached_fallback
                     }
-                logger.info(f"Extracted official delivery statistics for {len(delivery_map)} NSE equities.")
+                logger.info(f"Extracted delivery statistics for {len(delivery_map)} NSE equities (source: {'cache dated ' + cached_date_str if used_cached_fallback else 'fresh NSE download'}).")
                 return delivery_map
         except Exception as parse_err:
             logger.warning(f"Failed to parse NSE delivery CSV: {parse_err}")
@@ -334,20 +343,31 @@ def compute_all_scanners(
     name_map = dict(zip(universe_df["Symbol"], universe_df["Company Name"]))
     sector_map = dict(zip(universe_df["Symbol"], universe_df["Industry"]))
 
-    # Benchmark metrics
-    bench_clean = bench_series.dropna()
-    b_latest = float(bench_clean.iloc[-1]) if len(bench_clean) > 0 else 25000.0
-    b_prev = float(bench_clean.iloc[-2]) if len(bench_clean) > 1 else b_latest
-    b_change = b_latest - b_prev
-    b_change_pct = (b_change / b_prev) * 100.0 if b_prev > 0 else 0.0
-
     valid_symbols = [s for s in universe_df["Symbol"] if s in close_df.columns]
     logger.info(f"Analyzing {len(valid_symbols)} active stocks with valid price series.")
 
-    # Align dates between stock and benchmark
-    common_index = close_df.index.intersection(bench_clean.index)
-    aligned_close = close_df.loc[common_index]
-    aligned_bench = bench_clean.loc[common_index]
+    # Align dates between stock and benchmark without dropping latest equity candles.
+    # Derive the latest session date directly from the active equity universe.
+    valid_dates = close_df[valid_symbols].dropna(how="all").index if len(valid_symbols) > 0 else close_df.dropna(how="all").index
+    if len(valid_dates) > 0:
+        latest_equity_date = valid_dates[-1]
+        aligned_close = close_df.loc[:latest_equity_date]
+    else:
+        latest_equity_date = close_df.index[-1] if len(close_df.index) > 0 else pd.Timestamp.now().normalize()
+        aligned_close = close_df
+
+    # Align benchmark (^NSEI) to equity dates, forward-filling if ^NSEI is delayed
+    bench_clean = bench_series.dropna()
+    if not bench_clean.empty:
+        aligned_bench = bench_clean.reindex(aligned_close.index).ffill().bfill()
+    else:
+        aligned_bench = aligned_close.median(axis=1).ffill().bfill()
+
+    # Benchmark metrics aligned to actual latest equity session
+    b_latest = float(aligned_bench.iloc[-1]) if len(aligned_bench) > 0 else 25000.0
+    b_prev = float(aligned_bench.iloc[-2]) if len(aligned_bench) > 1 else b_latest
+    b_change = b_latest - b_prev
+    b_change_pct = (b_change / b_prev) * 100.0 if b_prev > 0 else 0.0
 
     # Containers
     rs_records = []
@@ -1152,13 +1172,24 @@ def compute_all_scanners(
     else:
         market_regime = "Neutral Consolidation"
 
-    today_str = datetime.date.today().strftime("%Y-%m-%d")
-    now_ist_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S IST")
+    # Session date accurately tagged from the actual latest equity candle
+    actual_latest_date = aligned_close.index[-1] if (not aligned_close.empty and len(aligned_close.index) > 0) else datetime.date.today()
+    if hasattr(actual_latest_date, "strftime"):
+        actual_session_date_str = actual_latest_date.strftime("%Y-%m-%d")
+    else:
+        actual_session_date_str = str(actual_latest_date)
+
+    import pytz
+    try:
+        ist_tz = pytz.timezone("Asia/Kolkata")
+        now_ist_str = datetime.datetime.now(ist_tz).strftime("%Y-%m-%d %H:%M:%S IST")
+    except Exception:
+        now_ist_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S IST")
 
     payload = {
         "metadata": {
             "generated_at_ist": now_ist_str,
-            "trading_date": today_str,
+            "trading_date": actual_session_date_str,
             "engine_version": "2.0.0",
             "status": "COMPLETED",
             "total_scanned": total_scanned,
