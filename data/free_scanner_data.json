@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-10-26 22:40:38 IST",
+    "generated_at_ist": "2026-10-26 23:01:16 IST",
     "trading_date": "2026-10-26",
     "engine_version": "2.0.0",
     "status": "COMPLETED",
@@ -20,18 +20,18 @@
       "change": 176.18,
       "change_pct": 0.71,
       "advances": 337,
-      "declines": 163,
+      "declines": 162,
       "pct_above_200dma": 28.9
     },
     "market_status": "Bullish Confirmation",
-    "breadth_ratio": "2.07 : 1"
+    "breadth_ratio": "2.08 : 1"
   },
   "summary_counts": {
     "rs_leaders": 33,
     "breakout": 10,
     "high_delivery": 20,
     "vcp": 9,
-    "fifty_two_week_high": 179
+    "fifty_two_week_high": 178
   },
   "scanners": {
     "rs_leaders": [
@@ -7802,53 +7802,6 @@
         "pivot_r1": 1421.9,
         "pivot_r2": 1448.5,
         "pivot_s1": 1375.8,
-        "sub_category": "Consolidating"
-      },
-      {
-        "symbol": "INDIANB",
-        "name": "Indian Bank",
-        "sector": "Financial Services",
-        "price": 830.0,
-        "change_pct": -0.85,
-        "signal_type": "Consolidating",
-        "signal_badge": "⏳ Consolidating",
-        "is_golden_cross": false,
-        "is_momentum_cross": false,
-        "is_power_trend": false,
-        "dist_50_ema_pct": -1.45,
-        "dist_200_sma_pct": -2.96,
-        "has_fresh_cross": false,
-        "fresh_cross_badge": null,
-        "cross_above_20_ema": false,
-        "cross_above_50_ema": false,
-        "cross_above_100_ema": false,
-        "cross_above_200_ema": false,
-        "cross_above_20_sma": false,
-        "cross_above_50_sma": false,
-        "cross_above_100_sma": false,
-        "cross_above_200_sma": false,
-        "above_20_ema": false,
-        "above_50_ema": false,
-        "above_100_ema": false,
-        "above_200_ema": true,
-        "above_20_sma": true,
-        "above_50_sma": false,
-        "above_100_sma": false,
-        "above_200_sma": false,
-        "ema_20": 837.98,
-        "ema_50": 842.18,
-        "ema_100": 844.34,
-        "ema_200": 828.43,
-        "sma_20": 827.53,
-        "sma_50": 851.17,
-        "sma_100": 844.83,
-        "sma_200": 855.35,
-        "pivot_status": "Near S1 Support",
-        "pivot_display": "Near S1 Support (₹826.2)",
-        "pivot_p": 842.33,
-        "pivot_r1": 853.27,
-        "pivot_r2": 869.38,
-        "pivot_s1": 826.22,
         "sub_category": "Consolidating"
       },
       {
