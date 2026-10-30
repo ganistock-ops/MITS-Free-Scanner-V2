@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-10-30 16:39:46 IST",
+    "generated_at_ist": "2026-10-30 22:17:07 IST",
     "trading_date": "2026-10-30",
-    "source": "NSE_BHAVCOPY",
+    "source": "NSE_OFFICIAL",
     "status": "VALIDATED"
   },
   "nifty_50": {
@@ -11,16 +11,6 @@
     "unchanged": 0,
     "total": 50,
     "advance_ratio_pct": 58.0,
-    "decline_ratio_pct": 42.0,
-    "close": 23053.1,
-    "change": 116.35,
-    "change_pct": 0.51
-  },
-  "nifty_500": {
-    "advances": 112,
-    "declines": 387,
-    "pct_above_200dma": 30.5
-  },
-  "market_status": "Bearish Correction",
-  "breadth_ratio": "0.29 : 1"
+    "decline_ratio_pct": 42.0
+  }
 }
