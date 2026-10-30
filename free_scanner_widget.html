@@ -14408,8 +14408,31 @@
     if (tab === 'fifty_two_week_high') {
       if (key === 'signal_type') {
         const isFreshFilterActive = (selectedFreshEmaFilter !== 'ALL' || selectedFreshSmaFilter !== 'ALL' || activePill === 'FRESH_CROSS');
-        if (row.fresh_cross_badge && (val === 'Fresh Cross' || isFreshFilterActive)) {
-          return `<span class="badge-grade grade-a-plus" style="background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.35); text-shadow: 0 0 6px rgba(0, 240, 255, 0.4); white-space: nowrap;">${row.fresh_cross_badge}</span>`;
+
+        // Dynamic cross badge based on active user filter
+        let dynamicBadgeText = null;
+        if (selectedFreshEmaFilter !== 'ALL') {
+          const emaBadges = {
+            'cross_above_20_ema': '⚡ Cross > 20 EMA',
+            'cross_above_50_ema': '⚡ Cross > 50 EMA',
+            'cross_above_100_ema': '⚡ Cross > 100 EMA',
+            'cross_above_200_ema': '🎯 Cross > 200 EMA'
+          };
+          dynamicBadgeText = emaBadges[selectedFreshEmaFilter];
+        } else if (selectedFreshSmaFilter !== 'ALL') {
+          const smaBadges = {
+            'cross_above_20_sma': '⚡ Cross > 20 SMA',
+            'cross_above_50_sma': '⚡ Cross > 50 SMA',
+            'cross_above_100_sma': '⚡ Cross > 100 SMA',
+            'cross_above_200_sma': '🎯 Cross > 200 SMA'
+          };
+          dynamicBadgeText = smaBadges[selectedFreshSmaFilter];
+        }
+
+        const badgeToDisplay = dynamicBadgeText || row.fresh_cross_badge;
+
+        if (badgeToDisplay && (val === 'Fresh Cross' || isFreshFilterActive)) {
+          return `<span class="badge-grade grade-a-plus" style="background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #00f0ff; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.35); text-shadow: 0 0 6px rgba(0, 240, 255, 0.4); white-space: nowrap;">${badgeToDisplay}</span>`;
         } else if (val === 'Golden Cross' || row.is_golden_cross) {
           return `<span class="badge-grade grade-b" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #fbbf24; font-weight: 800; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 10px rgba(245, 158, 11, 0.35); text-shadow: 0 0 6px rgba(245, 158, 11, 0.4); white-space: nowrap;">🏆 Golden Cross</span>`;
         } else if (val === 'Momentum Cross' || row.is_momentum_cross) {
@@ -14548,38 +14571,78 @@
       renderTable();
     });
 
-    // EMA Filter (Tab 5)
+    // EMA Filter (Tab 5) - Mutually resets SMA levels and conflicting fresh crosses
     const emaSelect = document.getElementById('mits-ema-select');
     if (emaSelect) {
       emaSelect.addEventListener('change', function(e) {
         selectedEmaFilter = e.target.value;
+        if (e.target.value !== 'ALL') {
+          selectedSmaFilter = 'ALL';
+          const smaSel = document.getElementById('mits-sma-select');
+          if (smaSel) smaSel.value = 'ALL';
+          selectedFreshSmaFilter = 'ALL';
+          const freshSmaSel = document.getElementById('mits-fresh-sma-select');
+          if (freshSmaSel) freshSmaSel.value = 'ALL';
+        }
         renderTable();
       });
     }
 
-    // SMA Filter (Tab 5)
+    // SMA Filter (Tab 5) - Mutually resets EMA levels and conflicting fresh crosses
     const smaSelect = document.getElementById('mits-sma-select');
     if (smaSelect) {
       smaSelect.addEventListener('change', function(e) {
         selectedSmaFilter = e.target.value;
+        if (e.target.value !== 'ALL') {
+          selectedEmaFilter = 'ALL';
+          const emaSel = document.getElementById('mits-ema-select');
+          if (emaSel) emaSel.value = 'ALL';
+          selectedFreshEmaFilter = 'ALL';
+          const freshEmaSel = document.getElementById('mits-fresh-ema-select');
+          if (freshEmaSel) freshEmaSel.value = 'ALL';
+        }
         renderTable();
       });
     }
 
-    // Fresh EMA Cross Filter (Tab 5)
+    // Fresh EMA Cross Filter (Tab 5) - Mutually resets SMA cross to prevent mixed/conflicting results
     const freshEmaSelect = document.getElementById('mits-fresh-ema-select');
     if (freshEmaSelect) {
       freshEmaSelect.addEventListener('change', function(e) {
         selectedFreshEmaFilter = e.target.value;
+        if (e.target.value !== 'ALL') {
+          selectedFreshSmaFilter = 'ALL';
+          const freshSmaSel = document.getElementById('mits-fresh-sma-select');
+          if (freshSmaSel) freshSmaSel.value = 'ALL';
+          selectedSmaFilter = 'ALL';
+          const smaSel = document.getElementById('mits-sma-select');
+          if (smaSel) smaSel.value = 'ALL';
+          if (activePill !== 'ALL' && activePill !== 'FRESH_CROSS') {
+            activePill = 'ALL';
+            renderPills();
+          }
+        }
         renderTable();
       });
     }
 
-    // Fresh SMA Cross Filter (Tab 5)
+    // Fresh SMA Cross Filter (Tab 5) - Mutually resets EMA cross to prevent mixed/conflicting results
     const freshSmaSelect = document.getElementById('mits-fresh-sma-select');
     if (freshSmaSelect) {
       freshSmaSelect.addEventListener('change', function(e) {
         selectedFreshSmaFilter = e.target.value;
+        if (e.target.value !== 'ALL') {
+          selectedFreshEmaFilter = 'ALL';
+          const freshEmaSel = document.getElementById('mits-fresh-ema-select');
+          if (freshEmaSel) freshEmaSel.value = 'ALL';
+          selectedEmaFilter = 'ALL';
+          const emaSel = document.getElementById('mits-ema-select');
+          if (emaSel) emaSel.value = 'ALL';
+          if (activePill !== 'ALL' && activePill !== 'FRESH_CROSS') {
+            activePill = 'ALL';
+            renderPills();
+          }
+        }
         renderTable();
       });
     }
