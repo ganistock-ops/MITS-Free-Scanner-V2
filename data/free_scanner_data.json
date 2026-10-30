@@ -12,8 +12,9 @@
       "close": 23053.1,
       "change": 116.35,
       "change_pct": 0.51,
-      "advances": 11,
-      "declines": 39
+      "advances": 29,
+      "declines": 21,
+      "unchanged": 0
     },
     "nifty_500": {
       "close": 21669.91,

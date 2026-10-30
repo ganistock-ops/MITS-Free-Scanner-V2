@@ -258,15 +258,31 @@
       background-color: #0e1524 !important;
     }
 
-    .mits-pro-landing-wrapper .pricing-tier-card {
+    .mits-pro-landing-wrapper .pricing-tier-card,
+    .mits-pro-landing-wrapper .pricing-plan-box {
       background-color: #0e1524 !important;
+    }
+
+    .mits-pro-landing-wrapper .pricing-plan-box.starter-plan {
+      background: linear-gradient(180deg, rgba(14, 21, 36, 0.95) 0%, rgba(9, 13, 22, 0.98) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    }
+
+    .mits-pro-landing-wrapper .pricing-plan-box.annual-plan.highlighted {
+      background: linear-gradient(180deg, rgba(22, 33, 54, 0.95) 0%, rgba(14, 21, 36, 0.98) 100%) !important;
       border: 2px solid var(--gold-primary) !important;
     }
 
-    .mits-pro-landing-wrapper .pricing-highlight-card {
+    .mits-pro-landing-wrapper .pricing-highlight-card,
+    .mits-pro-landing-wrapper .pricing-price-card.highlight {
       background-color: #0e1526 !important;
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.08) 40%, #0e1526 100%) !important;
       border: 1px solid #f59e0b !important;
+    }
+
+    .mits-pro-landing-wrapper .pricing-price-card.starter {
+      background: rgba(19, 29, 49, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     .mits-pro-landing-wrapper .faq-item {
@@ -1167,69 +1183,76 @@
       position: relative;
     }
     .pricing-card-container {
-      max-width: 840px;
+      max-width: 1080px;
       margin: 0 auto;
+      width: 100%;
     }
 
-    /* Billing Selector Toggle */
-    .pricing-toggle-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-    .billing-toggle-btn {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-medium);
-      padding: 6px;
-      border-radius: 100px;
-      display: flex;
-      gap: 6px;
-    }
-    .toggle-opt {
-      padding: 8px 22px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .toggle-opt.active {
-      background: var(--gold-gradient);
-      color: #060911;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
-    }
-    .discount-pill {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--emerald-light);
-      border: 1px solid var(--border-emerald);
-      font-size: 0.68rem;
-      padding: 2px 7px;
-      border-radius: 100px;
-      font-weight: 800;
+    /* Dual Side-by-Side Pricing Grid */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      align-items: stretch;
+      margin-bottom: 34px;
     }
 
-    /* The Main Tier Card */
-    .pricing-tier-card {
-      background: var(--bg-surface);
-      border: 2px solid var(--gold-primary);
+    /* Pricing Plan Card Base */
+    .pricing-plan-box {
       border-radius: var(--radius-xl);
-      padding: 48px;
+      padding: 44px 34px 36px;
       position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(245, 158, 11, 0.15);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
       overflow: hidden;
     }
-    .tier-badge-top {
+    .pricing-plan-box:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Box 1: Starter Access Card */
+    .pricing-plan-box.starter-plan {
+      background: linear-gradient(180deg, rgba(14, 21, 36, 0.95) 0%, rgba(9, 13, 22, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .pricing-plan-box.starter-plan:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+    .pricing-plan-box.starter-plan .plan-badge-top {
       position: absolute;
       top: 0;
-      right: 48px;
+      right: 32px;
+      background: rgba(255, 255, 255, 0.07);
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    /* Box 2: Annual All-Access Pass (Highlighted Box) */
+    .pricing-plan-box.annual-plan.highlighted {
+      background: linear-gradient(180deg, rgba(22, 33, 54, 0.95) 0%, rgba(14, 21, 36, 0.98) 100%);
+      border: 2px solid var(--gold-primary);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 45px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(251, 191, 36, 0.3);
+    }
+    .pricing-plan-box.annual-plan.highlighted:hover {
+      border-color: var(--gold-light);
+      box-shadow: 0 30px 75px rgba(0, 0, 0, 0.8), 0 0 55px rgba(245, 158, 11, 0.3);
+    }
+    .pricing-plan-box.annual-plan .plan-badge-top {
+      position: absolute;
+      top: 0;
+      right: 32px;
       background: var(--gold-gradient);
       color: #060911;
       font-size: 0.72rem;
@@ -1239,56 +1262,83 @@
       padding: 6px 16px;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
     }
 
-    .tier-header {
+    /* Card Header & Title */
+    .plan-header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      padding-top: 6px;
     }
-    .tier-title-area {
-      text-align: center;
-      width: 100%;
-    }
-    .tier-title-area h3 {
-      font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-      font-weight: 900;
+    .plan-title {
+      font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+      font-weight: 800;
       color: var(--text-pure);
-      margin-bottom: 8px;
       letter-spacing: -0.02em;
     }
-    .tier-title-area p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
 
-    /* Centered Dedicated Highlight Price Sub-Card */
-    .pricing-highlight-card {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.08) 40%, rgba(14, 21, 36, 0.95) 100%);
-      border: 1px solid #f59e0b;
+    /* Price Sub-Card Display Area */
+    .pricing-price-card {
       border-radius: var(--radius-lg);
-      padding: 26px 24px;
-      margin: 0 auto 34px;
-      max-width: 500px;
-      width: 100%;
+      padding: 22px 20px;
+      margin-bottom: 26px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(251, 191, 36, 0.25);
-      position: relative;
+      min-height: 128px;
     }
+    .pricing-price-card.starter {
+      background: rgba(19, 29, 49, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .pricing-price-card.starter .currency-symbol {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      line-height: 1;
+    }
+    .pricing-price-card.starter .price-val {
+      font-size: clamp(2.8rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    }
+    .pricing-price-card.highlight {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.08) 40%, rgba(14, 21, 36, 0.95) 100%);
+      border: 1px solid #f59e0b;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(251, 191, 36, 0.25);
+    }
+    .pricing-price-card.highlight .currency-symbol {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fbbf24;
+      line-height: 1;
+    }
+    .pricing-price-card.highlight .price-val {
+      font-size: clamp(2.8rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: #fbbf24;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+    }
+
     .price-top-meta {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 6px;
+      gap: 10px;
+      margin-bottom: 4px;
       flex-wrap: wrap;
     }
     .price-original {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-faint);
       text-decoration: line-through;
       font-weight: 600;
@@ -1297,7 +1347,7 @@
       background: rgba(245, 158, 11, 0.22);
       border: 1px solid #f59e0b;
       color: #fbbf24;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       padding: 3px 10px;
       border-radius: 100px;
@@ -1312,52 +1362,44 @@
       gap: 4px;
       margin: 2px 0;
     }
-    .price-main-figure .currency-symbol {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #fbbf24;
-      line-height: 1;
-    }
-    .price-main-figure .price-val {
-      font-size: clamp(3.2rem, 7vw, 4rem);
-      font-weight: 900;
-      color: #fbbf24;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      text-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
-    }
     .price-sub-caption {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
       font-weight: 600;
       letter-spacing: 0.02em;
       margin-top: 4px;
     }
 
-    .tier-features-heading {
-      font-size: 0.85rem;
+    /* Plan Features */
+    .plan-features-heading {
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--gold-light);
-      margin-bottom: 20px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .tier-features-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 28px;
-      margin-bottom: 40px;
+    .plan-features-heading.highlight {
+      color: var(--gold-light);
     }
-    .tier-features-list li {
+    .plan-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 8px;
+      flex-grow: 1;
+    }
+    .plan-features-list li {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       font-size: 0.92rem;
       color: var(--text-main);
+      line-height: 1.45;
     }
     .feature-check-icon {
       width: 18px;
@@ -1372,6 +1414,19 @@
       font-size: 0.65rem;
       flex-shrink: 0;
       margin-top: 3px;
+    }
+    .feature-check-icon.gold-check {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+
+    /* Common Checkout CTA Block */
+    .pricing-cta-wrap {
+      max-width: 680px;
+      margin: 36px auto 0;
+      width: 100%;
+      text-align: center;
     }
 
     /* High Visibility Primary Checkout Button */
@@ -1587,6 +1642,13 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
@@ -1722,21 +1784,23 @@
       .pricing-card-container {
         width: 100%;
       }
-      .pricing-tier-card {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .pricing-plan-box {
         width: 100%;
-        padding: 28px 18px;
+        padding: 34px 20px 26px;
         box-sizing: border-box;
       }
-      .tier-header {
-        text-align: center;
-        gap: 8px;
+      .pricing-plan-box .plan-badge-top {
+        right: 20px;
+        font-size: 0.68rem;
+        padding: 5px 12px;
       }
-      .tier-title-area {
-        text-align: center;
-      }
-      .pricing-highlight-card {
-        padding: 20px 14px;
-        margin-bottom: 26px;
+      .pricing-price-card {
+        padding: 18px 14px;
+        min-height: auto;
       }
       .price-main-figure .price-val {
         font-size: 2.8rem;
@@ -1747,9 +1811,8 @@
       .price-sub-caption {
         font-size: 0.85rem;
       }
-      .tier-features-list {
-        grid-template-columns: 1fr;
-        gap: 14px;
+      .pricing-cta-wrap {
+        margin-top: 24px;
       }
       .checkout-btn {
         width: 100%;
@@ -2397,82 +2460,100 @@
 
       <div class="pricing-card-container">
         
-        <!-- Billing Term Switcher (Annual Access Only) -->
-        <div class="pricing-toggle-wrap">
-          <div class="billing-toggle-btn">
-            <div class="toggle-opt active" style="cursor: default;">
-              <span>Annual Institutional Pass</span>
-              <span class="discount-pill">SAVE 50%</span>
+        <div class="pricing-grid">
+          <!-- Box 1: 1-Month Trial Pass -->
+          <div class="pricing-plan-box starter-plan">
+            <div class="plan-badge-top">STARTER ACCESS</div>
+
+            <div class="plan-header">
+              <h3 class="plan-title">1-Month Pass</h3>
             </div>
+
+            <div class="pricing-price-card starter">
+              <div class="price-main-figure">
+                <span class="currency-symbol">₹</span>
+                <span class="price-val mono">499</span>
+              </div>
+              <div class="price-sub-caption">
+                / month
+              </div>
+            </div>
+
+            <div class="plan-features-heading">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Feature Highlights:</span>
+            </div>
+
+            <ul class="plan-features-list">
+              <li>
+                <div class="feature-check-icon">✓</div>
+                <span>Full Access to All 6 Quantitative Engines</span>
+              </li>
+              <li>
+                <div class="feature-check-icon">✓</div>
+                <span>Pre-Calculated Invalidation Levels &amp; Stop-Loss</span>
+              </li>
+              <li>
+                <div class="feature-check-icon">✓</div>
+                <span>AI Market Snapshot &amp; Bias Evaluation</span>
+              </li>
+              <li>
+                <div class="feature-check-icon">✓</div>
+                <span>Daily Post-Market Delivery &amp; Trend Matrix</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Box 2: 1-Year All-Access Pass (Highlighted Box) -->
+          <div class="pricing-plan-box annual-plan highlighted">
+            <div class="plan-badge-top">MOST POPULAR • BEST VALUE</div>
+
+            <div class="plan-header">
+              <h3 class="plan-title">Annual All-Access Pass</h3>
+            </div>
+
+            <div class="pricing-price-card highlight">
+              <div class="price-top-meta">
+                <span class="price-original mono" id="display-original-price">₹5,999</span>
+                <span class="discount-inaugural-pill">50% FLAT INAUGURAL OFF</span>
+              </div>
+              <div class="price-main-figure">
+                <span class="currency-symbol">₹</span>
+                <span class="price-val mono" id="display-price">2,999</span>
+              </div>
+              <div class="price-sub-caption">
+                / year (All-Access Pass)
+              </div>
+            </div>
+
+            <div class="plan-features-heading highlight">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Feature Highlights:</span>
+            </div>
+
+            <ul class="plan-features-list">
+              <li>
+                <div class="feature-check-icon gold-check">✓</div>
+                <span>Includes All Features of 1-Month Pass</span>
+              </li>
+              <li>
+                <div class="feature-check-icon gold-check">✓</div>
+                <span>Uninterrupted 365 Days Access</span>
+              </li>
+              <li>
+                <div class="feature-check-icon gold-check">✓</div>
+                <span>Sector Rotation Radar &amp; Whale Accumulation Insights</span>
+              </li>
+              <li>
+                <div class="feature-check-icon gold-check">✓</div>
+                <span>Access to Upcoming Strategy Add-ons &amp; Mathematical Tools</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- High-Contrast Premium Membership Card -->
-        <div class="pricing-tier-card">
-          <div class="tier-badge-top">Most Popular • Full Suite</div>
-
-          <div class="tier-header">
-            <div class="tier-title-area">
-              <h3>MITS Pro Quantitative All-Access</h3>
-              <p>Full institutional scanner suite powered by automated daily EOD analytics</p>
-            </div>
-          </div>
-
-          <!-- Prominent Centered Dedicated Highlight Sub-Card -->
-          <div class="pricing-highlight-card">
-            <div class="price-top-meta">
-              <span class="price-original mono" id="display-original-price">₹9,999</span>
-              <span class="discount-inaugural-pill">50% FLAT INAUGURAL OFF</span>
-            </div>
-            <div class="price-main-figure">
-              <span class="currency-symbol">₹</span>
-              <span class="price-val mono" id="display-price">4,999</span>
-            </div>
-            <div class="price-sub-caption">
-              / year (All-Access Annual Pass)
-            </div>
-          </div>
-
-          <div class="tier-features-heading">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Everything Included in Institutional Pro:</span>
-          </div>
-
-          <ul class="tier-features-list">
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>All 6 Quantitative Engines:</strong> High Tight Flag, Alpha Momentum, DBR, Stage-2, Swing & Bottom Reversal.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Daily EOD Trend Matrix:</strong> Automated post-market sector strength and relative momentum rankings.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Pre-Calculated Invalidation Levels:</strong> Precise mathematical stop bounds for asymmetric risk management.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Institutional Delivery Deep-Dive:</strong> Filter NSE cash stocks with >2.5x smart money delivery spikes.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Institutional Trading & Position Sizing Calculators:</strong> Proprietary quantitative tools for precision risk-reward modeling and mathematical trade sizing.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Quantitative Playbook & Video Guides:</strong> Step-by-step institutional trade management protocols.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Market Breadth Regime Gauges:</strong> Know whether to play aggressive offense or defensive preservation.</span>
-            </li>
-            <li>
-              <div class="feature-check-icon">✓</div>
-              <span><strong>Dedicated Trader Support Desk:</strong> Direct onboarding and technical scanner support assistance.</span>
-            </li>
-          </ul>
-
+        <!-- Common Checkout CTA Block -->
+        <div class="pricing-cta-wrap">
           <!-- Primary Paid Memberships Pro Checkout Anchor CTA -->
           <a href="https://mits360.co.in/pro-scanner/" target="_blank" rel="noopener noreferrer" class="checkout-btn" id="pro-checkout-link">
             <span>Proceed to Secure Checkout & Activation</span>
@@ -2497,7 +2578,6 @@
               <span>UPI / Cards / NetBanking Supported</span>
             </div>
           </div>
-
         </div>
 
       </div>

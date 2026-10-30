@@ -1908,12 +1908,12 @@
         </div>
         <div id="nifty50-val" class="mits-card-val">25,418.30</div>
         <div class="mits-breadth-ratio-bar">
-          <div id="nifty50-adv-bar" class="mits-breadth-advances" style="width: 68%;"></div>
-          <div id="nifty50-dec-bar" class="mits-breadth-declines" style="width: 32%;"></div>
+          <div id="nifty50-adv-bar" class="mits-breadth-advances" style="width: 58%;"></div>
+          <div id="nifty50-dec-bar" class="mits-breadth-declines" style="width: 42%;"></div>
         </div>
         <div class="mits-breadth-stats">
-          <span class="adv-text">▲ <span id="nifty50-adv">34</span> Advances</span>
-          <span class="dec-text">▼ <span id="nifty50-dec">16</span> Declines</span>
+          <span class="adv-text">▲ <span id="nifty50-adv">29</span> Advances</span>
+          <span class="dec-text">▼ <span id="nifty50-dec">21</span> Declines</span>
         </div>
       </div>
 
@@ -2245,18 +2245,26 @@
       }
     } catch (e) {}
 
-    // 2. Fetch live data from GitHub repository (auto-updated daily by GitHub Actions)
-    try {
-      const resp = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-cache' });
-      if (resp.ok) {
-        const liveData = await resp.json();
-        scannerData = liveData;
-        try { localStorage.setItem('mits_scanner_cache_v2', JSON.stringify(liveData)); } catch (e) {}
-        renderAll();
-        console.log('[MITS Scanner] Live EOD dataset synchronized successfully from GitHub!');
+    // 2. Fetch live data (try local relative path first, then raw GitHub URL)
+    const sources = [
+      'data/free_scanner_data.json?t=' + Date.now(),
+      DATA_URL + '?t=' + Date.now()
+    ];
+
+    for (const src of sources) {
+      try {
+        const resp = await fetch(src, { cache: 'no-cache' });
+        if (resp.ok) {
+          const liveData = await resp.json();
+          scannerData = liveData;
+          try { localStorage.setItem('mits_scanner_cache_v2', JSON.stringify(liveData)); } catch (e) {}
+          renderAll();
+          console.log('[MITS Scanner] Live EOD dataset synchronized successfully from', src);
+          break;
+        }
+      } catch (err) {
+        // Try next source
       }
-    } catch (err) {
-      console.warn('[MITS Scanner] Error connecting to live dataset, fallback cached data retained.', err);
     }
   }
 
@@ -2340,7 +2348,8 @@
         const advBar = document.getElementById('nifty50-adv-bar');
         const decBar = document.getElementById('nifty50-dec-bar');
         if (advBar && decBar) {
-          const n50AdvPct = (n50.advances / (n50.advances + n50.declines)) * 100;
+          const totalN50 = (n50.advances + n50.declines) || 50;
+          const n50AdvPct = (n50.advances / totalN50) * 100;
           advBar.style.width = `${n50AdvPct}%`;
           decBar.style.width = `${100 - n50AdvPct}%`;
         }

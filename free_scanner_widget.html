@@ -1547,12 +1547,12 @@
         </div>
         <div id="nifty50-val" class="mits-card-val">25,418.30</div>
         <div class="mits-breadth-ratio-bar">
-          <div id="nifty50-adv-bar" class="mits-breadth-advances" style="width: 68%;"></div>
-          <div id="nifty50-dec-bar" class="mits-breadth-declines" style="width: 32%;"></div>
+          <div id="nifty50-adv-bar" class="mits-breadth-advances" style="width: 58%;"></div>
+          <div id="nifty50-dec-bar" class="mits-breadth-declines" style="width: 42%;"></div>
         </div>
         <div class="mits-breadth-stats">
-          <span class="adv-text">▲ <span id="nifty50-adv">34</span> Advances</span>
-          <span class="dec-text">▼ <span id="nifty50-dec">16</span> Declines</span>
+          <span class="adv-text">▲ <span id="nifty50-adv">29</span> Advances</span>
+          <span class="dec-text">▼ <span id="nifty50-dec">21</span> Declines</span>
         </div>
       </div>
 
@@ -1746,8 +1746,9 @@
       "close": 23053.1,
       "change": 116.35,
       "change_pct": 0.51,
-      "advances": 11,
-      "declines": 39
+      "advances": 29,
+      "declines": 21,
+      "unchanged": 0
     },
     "nifty_500": {
       "close": 21669.91,
@@ -13649,91 +13650,6 @@
   }
 };
 
-  // State
-  let scannerData = null;
-  let currentTab = 'rs_leaders';
-  let searchTerm = '';
-  let selectedSector = 'ALL';
-  let selectedEmaFilter = 'ALL';
-  let selectedSmaFilter = 'ALL';
-  let selectedFreshEmaFilter = 'ALL';
-  let selectedFreshSmaFilter = 'ALL';
-  let activePill = 'ALL';
-  let sortColumn = null;
-  let sortDirection = 'desc';
-
-  // Tab Definitions and Column Schemas
-  const TAB_DEFINITIONS = {
-    rs_leaders: {
-      name: 'Relative Strength',
-      columns: [
-        { key: 'symbol', label: 'Ticker / Company', sortable: true },
-        { key: 'sector', label: 'Sector', sortable: true },
-        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
-        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
-        { key: 'rs_rating', label: 'RS Rating', sortable: true, align: 'center' },
-        { key: 'mansfield_rs', label: 'Mansfield RS', sortable: true, align: 'right' },
-        { key: 'three_month_status', label: '3M High Status', sortable: true, align: 'center' },
-        { key: 'pivot_status', label: 'Pivot Position', sortable: true, align: 'center' },
-        { key: 'rs_1m', label: '1M RS %', sortable: true, align: 'right' },
-        { key: 'rs_3m', label: '3M RS %', sortable: true, align: 'right' },
-        { key: 'volume_ratio', label: 'Rel Vol', sortable: true, align: 'center' },
-        { key: 'rs_trend', label: 'Strength Status', sortable: true, align: 'left' }
-      ]
-    },
-    breakout: {
-      name: 'VCP Contraction Engine',
-      columns: [
-        { key: 'symbol', label: 'Ticker / Company', sortable: true },
-        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
-        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
-        { key: 'stage', label: 'Contraction Stage', sortable: true, align: 'center' },
-        { key: 'contractions', label: 'Contraction Depth (T-Cycles)', sortable: false, align: 'left' },
-        { key: 'base_pivot', label: 'Base Pivot (₹)', sortable: true, align: 'right' },
-        { key: 'pivot_distance_pct', label: 'Dist to Pivot', sortable: true, align: 'right' },
-        { key: 'vol_ratio', label: 'Vol Multiple', sortable: true, align: 'center' },
-        { key: 'pivot_display', label: 'Classical Pivot Level', sortable: true, align: 'center' },
-        { key: 'quality_grade', label: 'Quality Grade', sortable: true, align: 'center' }
-      ]
-    },
-    high_delivery: {
-      name: 'Institutional High Delivery Accumulation',
-      columns: [
-        { key: 'symbol', label: 'Stock / Company', sortable: true },
-        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
-        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
-        { key: 'quality_grade', label: 'Accumulation Grade', sortable: true, align: 'center' },
-        { key: 'delivery_pct', label: 'Delivery %', sortable: true, align: 'left' },
-        { key: 'vol_multiplier', label: 'Volume Surge', sortable: true, align: 'center' },
-        { key: 'pivot_display', label: 'Classical Pivot Status', sortable: true, align: 'center' }
-      ]
-    },
-    vcp: {
-      name: 'Momentum & Uncharted Highs Breakout Engine',
-      columns: [
-        { key: 'symbol', label: 'Stock / Company', sortable: true },
-        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
-        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
-        { key: 'breakout_type', label: 'Breakout Type', sortable: true, align: 'center' },
-        { key: 'quality_grade', label: 'Quality Grade', sortable: true, align: 'center' },
-        { key: 'vol_multiplier', label: 'Volume Multiplier', sortable: true, align: 'center' },
-        { key: 'pivot_display', label: 'Pivot Level Status', sortable: true, align: 'center' }
-      ]
-    },
-    fifty_two_week_high: {
-      name: 'Moving Average Trend Matrix',
-      columns: [
-        { key: 'symbol', label: 'Stock / Company', sortable: true },
-        { key: 'price', label: 'LTP (₹)', sortable: true, align: 'right' },
-        { key: 'change_pct', label: 'Change %', sortable: true, align: 'right' },
-        { key: 'signal_type', label: 'Signal / Trend', sortable: true, align: 'center' },
-        { key: 'dist_50_ema_pct', label: 'Dist to 50 EMA', sortable: true, align: 'right' },
-        { key: 'dist_200_sma_pct', label: 'Dist to 200 SMA', sortable: true, align: 'right' },
-        { key: 'pivot_display', label: 'Pivot Level Status', sortable: true, align: 'center' }
-      ]
-    }
-  };
-
   // Helper Formatter
   function formatINR(val) {
     if (val === undefined || val === null) return '-';
@@ -13843,7 +13759,8 @@
         const advBar = document.getElementById('nifty50-adv-bar');
         const decBar = document.getElementById('nifty50-dec-bar');
         if (advBar && decBar) {
-          const n50AdvPct = (n50.advances / (n50.advances + n50.declines)) * 100;
+          const totalN50 = (n50.advances + n50.declines) || 50;
+          const n50AdvPct = (n50.advances / totalN50) * 100;
           advBar.style.width = `${n50AdvPct}%`;
           decBar.style.width = `${100 - n50AdvPct}%`;
         }

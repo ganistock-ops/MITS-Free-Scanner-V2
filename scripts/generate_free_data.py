@@ -46,8 +46,27 @@ logger = logging.getLogger("MITS-FastEngine")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 OUTPUT_JSON = os.path.join(DATA_DIR, "free_scanner_data.json")
+ADVANCE_DECLINE_JSON = os.path.join(DATA_DIR, "advance_decline_data.json")
 WIDGET_HTML = os.path.join(BASE_DIR, "free_scanner_widget.html")
+WORDPRESS_SNIPPET_HTML = os.path.join(BASE_DIR, "wordpress_embed_snippet.html")
 UNIVERSE_CSV = os.path.join(DATA_DIR, "nifty500_universe.csv")
+UNIVERSE_NIFTY50_CSV = os.path.join(DATA_DIR, "nifty50_universe.csv")
+
+# Import official Nifty 50 Market Breadth Engine
+try:
+    from scripts.market_breadth import (
+        fetch_official_nifty50_breadth,
+        load_nifty50_universe,
+        save_advance_decline_data,
+        NIFTY_50_OFFICIAL_CONSTITUENTS
+    )
+except ImportError:
+    from market_breadth import (
+        fetch_official_nifty50_breadth,
+        load_nifty50_universe,
+        save_advance_decline_data,
+        NIFTY_50_OFFICIAL_CONSTITUENTS
+    )
 
 # Load credentials from .env
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -238,7 +257,7 @@ def fetch_official_delivery_data(smartapi_connected: bool, symbols: List[str]) -
         date_str = chk_date.strftime("%d%m%Y")
         url = f"https://archives.nseindia.com/products/content/sec_bhavdata_full_{date_str}.csv"
         try:
-            r = requests.get(url, headers=headers, timeout=6)
+            r = requests.get(url, headers=headers, timeout=12)
             if r.status_code == 200 and "DELIV_PER" in r.text:
                 downloaded_content = r.text
                 logger.info(f"Successfully downloaded official NSE delivery data for {date_str} ({len(r.text)} bytes).")
@@ -1172,6 +1191,21 @@ def compute_all_scanners(
     else:
         market_regime = "Neutral Consolidation"
 
+    # Official Nifty 50 Market Breadth (Validated: advances + declines + unchanged == 50)
+    n50_symbols = load_nifty50_universe(DATA_DIR)
+    n50_breadth = fetch_official_nifty50_breadth(
+        target_dir=DATA_DIR,
+        nifty50_symbols=n50_symbols,
+        aligned_close=aligned_close
+    )
+    n50_advances = n50_breadth["advances"]
+    n50_declines = n50_breadth["declines"]
+    n50_unchanged = n50_breadth.get("unchanged", 0)
+    logger.info(
+        f"Validated Nifty 50 Official Market Breadth: "
+        f"{n50_advances} Advances, {n50_declines} Declines, {n50_unchanged} Unchanged (Source: {n50_breadth.get('source', 'OFFICIAL')})"
+    )
+
     # Session date accurately tagged from the actual latest equity candle
     actual_latest_date = aligned_close.index[-1] if (not aligned_close.empty and len(aligned_close.index) > 0) else datetime.date.today()
     if hasattr(actual_latest_date, "strftime"):
@@ -1200,8 +1234,9 @@ def compute_all_scanners(
                 "close": clean_num(b_latest),
                 "change": clean_num(b_change),
                 "change_pct": clean_num(b_change_pct),
-                "advances": int(round(advances * (50.0 / total_scanned))),
-                "declines": int(round(declines * (50.0 / total_scanned)))
+                "advances": n50_advances,
+                "declines": n50_declines,
+                "unchanged": n50_unchanged
             },
             "nifty_500": {
                 "close": clean_num(b_latest * 0.94),
@@ -1237,7 +1272,7 @@ def compute_all_scanners(
 # 5. ATOMIC DATA EXPORT & HTML FALLBACK SYNCHRONIZER
 # ==============================================================================
 def export_and_sync(payload: Dict[str, Any]):
-    """Saves to data/free_scanner_data.json and syncs fallback data in widget HTML."""
+    """Saves to data/free_scanner_data.json, data/advance_decline_data.json and syncs fallback data in widget HTML."""
     os.makedirs(DATA_DIR, exist_ok=True)
     json_str = json.dumps(payload, ensure_ascii=False, indent=2)
 
@@ -1246,28 +1281,43 @@ def export_and_sync(payload: Dict[str, Any]):
         f.write(json_str)
     logger.info(f"Saved live JSON dataset to: {OUTPUT_JSON} ({len(json_str)} bytes)")
 
-    # 2. Synchronize inline fallback into free_scanner_widget.html
-    if os.path.exists(WIDGET_HTML):
-        with open(WIDGET_HTML, "r", encoding="utf-8") as f:
-            html_content = f.read()
+    # 2. Save dedicated advance_decline_data.json
+    try:
+        n50_b = payload.get("market_breadth", {}).get("nifty_50", {})
+        save_advance_decline_data(
+            breadth_data=n50_b,
+            target_dir=DATA_DIR,
+            session_date=payload.get("metadata", {}).get("trading_date"),
+            now_ist=payload.get("metadata", {}).get("generated_at_ist")
+        )
+    except Exception as ad_err:
+        logger.warning(f"Error saving advance_decline_data.json: {ad_err}")
 
-        start_marker = "const FALLBACK_DATA = "
-        end_marker = ";\n\n  // State"
+    # 3. Synchronize inline fallback into free_scanner_widget.html and wordpress_embed_snippet.html
+    import re
+    sync_targets = [WIDGET_HTML, WORDPRESS_SNIPPET_HTML]
+    pattern = r"(const FALLBACK_DATA = )(\{[\s\S]*?\n\s*\});(\r?\n\r?\n\s*// Helper Formatter)"
 
-        idx_start = html_content.find(start_marker)
-        idx_end = html_content.find(end_marker, idx_start)
+    for target_path in sync_targets:
+        if os.path.exists(target_path):
+            try:
+                with open(target_path, "r", encoding="utf-8") as f:
+                    html_content = f.read()
 
-        if idx_start != -1 and idx_end != -1:
-            new_html = (
-                html_content[:idx_start + len(start_marker)]
-                + json_str
-                + html_content[idx_end:]
-            )
-            with open(WIDGET_HTML, "w", encoding="utf-8") as f:
-                f.write(new_html)
-            logger.info("Successfully synchronized live dataset into free_scanner_widget.html fallback!")
-        else:
-            logger.warning("Could not locate FALLBACK_DATA marker in free_scanner_widget.html to sync.")
+                if re.search(pattern, html_content):
+                    new_html = re.sub(
+                        pattern,
+                        lambda m: f"{m.group(1)}{json_str};{m.group(3)}",
+                        html_content,
+                        count=1
+                    )
+                    with open(target_path, "w", encoding="utf-8") as f:
+                        f.write(new_html)
+                    logger.info(f"Successfully synchronized live dataset into {os.path.basename(target_path)} fallback!")
+                else:
+                    logger.warning(f"Could not locate FALLBACK_DATA regex pattern in {os.path.basename(target_path)}.")
+            except Exception as sync_err:
+                logger.error(f"Failed to synchronize fallback in {target_path}: {sync_err}")
 
 
 # ==============================================================================
