@@ -1,15 +1,17 @@
 name: Daily Evening Multi-Time EOD Stock Scanner
 
 on:
-  schedule:
-    # 04:00 PM IST -> 10:30 UTC (Mon-Fri)
-    - cron: '30 10 * * 1-5'
-    # 04:30 PM IST -> 11:00 UTC (Mon-Fri)
-    - cron: '0 11 * * 1-5'
-    # 05:00 PM IST -> 11:30 UTC (Mon-Fri)
-    - cron: '30 11 * * 1-5'
-    # 05:30 PM IST -> 12:00 UTC (Mon-Fri)
-    - cron: '0 12 * * 1-5'
+  # Automated cron triggers disabled to prevent delayed overnight/pre-market runs from rolling back EOD data.
+  # Manual trigger via 'Run workflow' button in GitHub Actions tab is used instead.
+  # schedule:
+  #   # 04:00 PM IST -> 10:30 UTC (Mon-Fri)
+  #   - cron: '30 10 * * 1-5'
+  #   # 04:30 PM IST -> 11:00 UTC (Mon-Fri)
+  #   - cron: '0 11 * * 1-5'
+  #   # 05:00 PM IST -> 11:30 UTC (Mon-Fri)
+  #   - cron: '30 11 * * 1-5'
+  #   # 05:30 PM IST -> 12:00 UTC (Mon-Fri)
+  #   - cron: '0 12 * * 1-5'
   workflow_dispatch:
 
 permissions:
