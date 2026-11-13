@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "generated_at_ist": "2026-11-12 18:14:37 IST",
-    "trading_date": "2026-11-12",
+    "generated_at_ist": "2026-11-13 17:58:24 IST",
+    "trading_date": "2026-11-13",
     "source": "NSE_OFFICIAL",
     "status": "VALIDATED"
   },
   "nifty_50": {
-    "advances": 20,
-    "declines": 30,
-    "unchanged": 0,
+    "advances": 11,
+    "declines": 38,
+    "unchanged": 1,
     "total": 50,
-    "advance_ratio_pct": 40.0,
-    "decline_ratio_pct": 60.0
+    "advance_ratio_pct": 22.0,
+    "decline_ratio_pct": 76.0
   }
 }
