@@ -490,7 +490,127 @@
       transform: translateX(3px);
     }
 
-    /* 6 Core Setups Showcase Grid */
+    /* MITS Pro Quantitative Suite - 3-Pillar Feature Layout */
+    .mits-scanner-wrapper .mits-pro-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mits-scanner-wrapper .mits-pro-pillar-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 9px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .mits-scanner-wrapper .mits-pro-pillar-card:hover {
+      background: rgba(26, 38, 64, 0.85);
+      border-color: rgba(0, 240, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 240, 255, 0.12);
+    }
+
+    .mits-scanner-wrapper .mits-pro-pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: rgba(0, 240, 255, 0.4);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .mits-scanner-wrapper .mits-pro-pillar-card:hover::before {
+      opacity: 1;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-icon {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-icon.amber {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.3));
+    }
+
+    .mits-scanner-wrapper .mits-pillar-icon.cyan {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.3));
+    }
+
+    .mits-scanner-wrapper .mits-pillar-icon.emerald {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.3));
+    }
+
+    .mits-scanner-wrapper .mits-pillar-heading-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-tag {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mits-scanner-wrapper .mits-pillar-desc {
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: #94a3b8;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Retained Legacy Fallback Styles */
     .mits-scanner-wrapper .mits-pro-setups-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1242,8 +1362,10 @@
       .mits-scanner-wrapper .mits-breadth-banner {
         grid-template-columns: 1fr;
       }
-      .mits-scanner-wrapper .mits-pro-setups-grid {
+      .mits-scanner-wrapper .mits-pro-setups-grid,
+      .mits-scanner-wrapper .mits-pro-pillars-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
       }
     }
 
@@ -1319,6 +1441,11 @@
         width: 100%;
         text-align: center;
         padding: 8px 14px;
+      }
+
+      .mits-scanner-wrapper .mits-pro-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
       }
 
       .mits-scanner-wrapper .mits-pro-setups-grid {
@@ -1507,6 +1634,12 @@
         padding: 10px 6px 24px;
       }
 
+      .mits-scanner-wrapper .mits-pro-setups-grid,
+      .mits-scanner-wrapper .mits-pro-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
       .mits-scanner-wrapper .mits-table-container {
         border-radius: var(--mits-radius-md);
       }
@@ -1566,64 +1699,57 @@
         </div>
       </div>
 
-      <!-- MITS Pro Quantitative Suite Promo Card (Replacing Cards 2 & 3) -->
+      <!-- MITS Pro Quantitative Suite Promo Card (3-Pillar Institutional Layout) -->
       <div class="mits-breadth-card mits-pro-suite-card">
         <div class="mits-pro-card-header">
           <div class="mits-pro-header-left">
             <div class="mits-pro-title-row">
               <span class="mits-pro-icon">⚡</span>
               <span class="mits-pro-title">MITS Pro Quantitative Suite</span>
-              <span class="mits-pro-badge"><span class="mits-pro-badge-dot"></span>INSTITUTIONAL EDGE</span>
+              <span class="mits-pro-badge"><span class="mits-pro-badge-dot"></span>12 ADVANCED SCANNERS</span>
             </div>
           </div>
-          <a href="https://mits360.co.in/pro-scanner/" target="_blank" rel="noopener noreferrer" class="mits-pro-cta-btn">
+          <a href="https://mits360.co.in/pro-suite-landing-page/" target="_blank" rel="noopener noreferrer" class="mits-pro-cta-btn">
             <span>Unlock Pro Scanner</span>
             <span class="mits-pro-cta-arrow">→</span>
           </a>
         </div>
 
-        <div class="mits-pro-setups-grid">
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot cyan"></span>
-              <span class="mits-setup-name">Bottom Reversal Pro</span>
+        <div class="mits-pro-pillars-grid">
+          <!-- Pillar 1: 12 Algorithmic Scanners -->
+          <div class="mits-pro-pillar-card">
+            <div class="mits-pillar-header">
+              <span class="mits-pillar-icon amber">🎯</span>
+              <div class="mits-pillar-heading-wrap">
+                <span class="mits-pillar-title">12 Algorithmic Scanners</span>
+                <span class="mits-pillar-tag">SYSTEMATIC MOMENTUM</span>
+              </div>
             </div>
-            <span class="mits-setup-desc">Exhaustion &amp; Demand Retests</span>
+            <p class="mits-pillar-desc">High Tight Flags, Alpha Momentum, DBR &amp; Stage-2 Breakouts across Nifty 500.</p>
           </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot gold"></span>
-              <span class="mits-setup-name">Alpha Momentum</span>
+
+          <!-- Pillar 2: Institutional Footprint -->
+          <div class="mits-pro-pillar-card">
+            <div class="mits-pillar-header">
+              <span class="mits-pillar-icon cyan">🏛️</span>
+              <div class="mits-pillar-heading-wrap">
+                <span class="mits-pillar-title">Institutional Footprint</span>
+                <span class="mits-pillar-tag">RELATIVE STRENGTH (RS)</span>
+              </div>
             </div>
-            <span class="mits-setup-desc">Sector Outperformers</span>
+            <p class="mits-pillar-desc">Isolates true smart money accumulation and leading sectors while filtering retail noise.</p>
           </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot amber"></span>
-              <span class="mits-setup-name">High Tight Flag</span>
+
+          <!-- Pillar 3: Multi-Timeframe Sync -->
+          <div class="mits-pro-pillar-card">
+            <div class="mits-pillar-header">
+              <span class="mits-pillar-icon emerald">📈</span>
+              <div class="mits-pillar-heading-wrap">
+                <span class="mits-pillar-title">Multi-Timeframe Sync</span>
+                <span class="mits-pillar-tag">DAILY + WEEKLY HARMONY</span>
+              </div>
             </div>
-            <span class="mits-setup-desc">Explosive Contractions</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot emerald"></span>
-              <span class="mits-setup-name">Weekly Swing</span>
-            </div>
-            <span class="mits-setup-desc">High Probability Swings</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot purple"></span>
-              <span class="mits-setup-name">Stage-2 Pullback</span>
-            </div>
-            <span class="mits-setup-desc">Institutional Continuation</span>
-          </div>
-          <div class="mits-pro-setup-pill">
-            <div class="mits-setup-pill-header">
-              <span class="mits-setup-dot cyan"></span>
-              <span class="mits-setup-name">DBR Setup</span>
-            </div>
-            <span class="mits-setup-desc">Demand-Base-Rally Engines</span>
+            <p class="mits-pillar-desc">Dual-timeframe trend alignment and actionable screener signals for high-conviction swing entries.</p>
           </div>
         </div>
       </div>
